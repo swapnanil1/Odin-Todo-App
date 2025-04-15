@@ -1,0 +1,37 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#content > * {
+  flex-grow: 1;
+  border: 1px solid blue;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  flex-shrink: 0;
+}
+#sidebar > * {
+  flex-grow: 1;
+  border: 2px solid green;
+}
+#sidebar .newTask {
+  /* let newTaskBtn be smaller than  */
+  max-height: 2rem;
+}
