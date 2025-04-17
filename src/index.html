@@ -8,32 +8,58 @@
   <body>
     <div id="container">
       <main id="content">
-        <section id="lowp">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. A, ipsam!
-        </section>
-        <section id="medp">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio,
-          tenetur.
-        </section>
-        <section id="highp">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste,
-          facilis.
-        </section>
+        <section id="lowp">Clouds in the sky</section>
+        <section id="medp">suns multiply</section>
+        <section id="highp">plants need water to live</section>
       </main>
       <aside id="sidebar">
         <section class="priority">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quas.
+          <!-- shows low med high priority tasks in details -->
         </section>
         <section class="projects">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-          porro!
+          <!-- <ul> lists projects via dom and dynamically adds them here and inside newNoteModal
+            <li>Personal</li>
+            <li>Work</li>
+            <li>Hobbies</li>
+            <li>Hobbies</li>
+            <li>Grocery</li>
+          </ul> -->
         </section>
         <section class="upcoming">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
-          ducimus?
+          <!-- lists upcomming tasks according to due dates -->
         </section>
-        <section class="newTask"><button type="button">+</button></section>
+        <section class="newTask">
+          <button class="newNote" type="button">Create New Note</button>
+        </section>
       </aside>
+      <!-- The Input Modal -->
+      <dialog class="newNoteModal">
+        <form action="https://httpbin.org/post" method="post">
+          <label for="name">Name</label>
+          <input type="text" id="name" /><br /><br />
+          <label for="descript">Description</label>
+          <input type="text" id="descript" /><br /><br />
+          <label for="due">Due Date</label>
+          <input type="date" id="due" /><br /><br />
+          <legend>Priority</legend>
+          <select name="priority" id="priority">
+            <option value="lowp">Low Priority</option>
+            <option value="medp">Medium Priority</option>
+            <option value="highp">High Priority</option>
+          </select>
+          <legend>Projects</legend>
+          <select id="projects" name="projects">
+            <!-- later add proper dom to attach them here and list project inside
+            projectSection -->
+            <option selected>Personal</option>
+            <option>Work</option>
+            <option>Hobbies</option>
+            <option>Grocery</option>
+          </select>
+          <button type="submit">Submit</button>
+          <button type="button" class="closeBtn">Close</button>
+        </form>
+      </dialog>
     </div>
   </body>
 </html>

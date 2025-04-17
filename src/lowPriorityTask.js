@@ -1,4 +1,5 @@
 import getRandomPlantSvg from "./randomPlant.js";
+const dom_lowP = document.getElementById(lowp);
 // const lowPriortiyChoice = document.getElementById("priorityChoice");
 // const plantArea = document.getElementById("plantArea");
 
