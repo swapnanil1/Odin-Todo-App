@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo</title>
   </head>
+
   <body>
     <div id="container">
       <main id="content">
-        <section id="lowp">Clouds in the sky</section>
-        <section id="medp">suns multiply</section>
-        <section id="highp">plants need water to live</section>
+        <section id="highp"><ul></ul></section>
+        <section id="medp"><ul></ul></section>
+        <section id="lowp"><ul></ul></section>
       </main>
       <aside id="sidebar">
         <section class="priority">
@@ -29,12 +30,12 @@
           <!-- lists upcomming tasks according to due dates -->
         </section>
         <section class="newTask">
-          <button class="newNote" type="button">Create New Note</button>
+          <button class="newNoteBtn" type="button">Create New Note</button>
         </section>
       </aside>
       <!-- The Input Modal -->
       <dialog class="newNoteModal">
-        <form action="https://httpbin.org/post" method="post">
+        <form id="newNoteForm" action="" method="">
           <label for="name">Name</label>
           <input type="text" id="name" /><br /><br />
           <label for="descript">Description</label>
