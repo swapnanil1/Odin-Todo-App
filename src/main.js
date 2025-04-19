@@ -1,2 +1,4 @@
 import "./style.css";
-import "./createTask";
+import initializeCreateTaskModal from "./createTask.js";
+initializeCreateTaskModal();
+console.log("Application started.");
