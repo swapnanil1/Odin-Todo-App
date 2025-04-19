@@ -147,7 +147,6 @@ function getRandomPlantSvg(name, descript) {
   const numberOfFlowers = Math.random() < 0.4 ? 2 : 3;
 
   if (numberOfFlowers === 2 && isRed(currentPetalColor)) {
-    // Corrected logic: Override if 2 flowers AND it *IS* red
     const overridePalette = getRandomElement(nonRedOverridePalettes);
     currentPetalColor = overridePalette.petal;
     currentPetalStroke = overridePalette.stroke;
@@ -197,8 +196,9 @@ function getRandomPlantSvg(name, descript) {
     </g>
   `;
 
+  // --- Changed ID to fixed value ---
   const finalSvg = `
-<svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" id="plantSVG_random_${Date.now()}">
+<svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" id="taskPlantIcon">
   <title>${titleContent}</title>
   <desc>${descContent}</desc>
   ${currentPot}

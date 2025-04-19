@@ -1,7 +1,7 @@
 // sandcastleComponent.js
 
 const sandcastleSvgV1 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="sandcastleSVG_v1">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <title>Simple Castle</title>
   <desc>A simple sandcastle with one central tower and a flag.</desc>
   <defs>
@@ -28,7 +28,7 @@ const sandcastleSvgV1 = `
 `;
 
 const sandcastleSvgV2 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="sandcastleSVG_v2">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <title>Two Tower Castle</title>
   <desc>A sandcastle with two towers connected by a wall.</desc>
    <defs>
@@ -53,7 +53,7 @@ const sandcastleSvgV2 = `
 `;
 
 const sandcastleSvgV3 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="sandcastleSVG_v3">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <title>Mound Castle</title>
   <desc>A sandcastle built on a rounded mound with a pail.</desc>
   <path d="M 10 90 Q 50 50, 90 90 Z" fill="#F4A460"/>
@@ -73,7 +73,7 @@ const sandcastleSvgV3 = `
 `;
 
 const sandcastleSvgV4 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="sandcastleSVG_v4">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <title>Castle with Arch</title>
   <desc>A sandcastle featuring a central archway.</desc>
   <rect x="5" y="70" width="90" height="20" fill="#DEB887"/>
@@ -92,7 +92,7 @@ const sandcastleSvgV4 = `
 `;
 
 const sandcastleSvgV5 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="sandcastleSVG_v5">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <title>Tiered Castle</title>
   <desc>A sandcastle with multiple tiers and simple details.</desc>
   <rect x="10" y="75" width="80" height="15" fill="#F4A460"/>
@@ -127,6 +127,7 @@ function escapeXml(unsafe) {
   if (typeof unsafe !== "string") {
     return unsafe;
   }
+  // *** Corrected escapeXml function ***
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
       case "<":
@@ -154,6 +155,7 @@ function getRandomSandcastleSvg(name, descript) {
     descript || "A sandcastle representing a task."
   );
 
+  // Replace title and desc first
   svgMarkup = svgMarkup.replace(
     /(<title>)([\s\S]*?)(<\/title>)/i,
     `$1${nameContent}$3`
@@ -162,7 +164,15 @@ function getRandomSandcastleSvg(name, descript) {
     /(<desc>)([\s\S]*?)(<\/desc>)/i,
     `$1${descContent}$3`
   );
+
+  // Replace the placeholder text
   svgMarkup = svgMarkup.replace(/TASK_NAME_PLACEHOLDER/g, nameContent);
+
+  // --- Add the consistent ID ---
+  svgMarkup = svgMarkup.replace(
+    /(<svg[^>]*)/,
+    '$1 id="taskSandcastleIcon"' // Add the fixed id
+  );
 
   return svgMarkup;
 }

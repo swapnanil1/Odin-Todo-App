@@ -1,9 +1,7 @@
 // cloudComponent.js
 
-// --- SVG Shapes (Placeholders for Fills) ---
-
 const cloudSvgV1 = `
-<svg width="100" height="60" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" id="cloudSVG_v1_themed">
+<svg width="100" height="60" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
   <title>Gentle Puff Cloud</title>
   <desc>A medium-sized, soft cumulus cloud.</desc>
   <path id="cloud1Path" d="M 20 60 C 5 60, 5 40, 30 40 C 30 20, 60 20, 70 35 C 85 25, 110 35, 110 50 C 125 50, 125 60, 100 60 Z" fill="CLOUD_FILL_URL_OR_COLOR" />
@@ -14,7 +12,7 @@ const cloudSvgV1 = `
 `;
 
 const cloudSvgV2_new = `
-<svg width="100" height="65" viewBox="0 0 130 75" xmlns="http://www.w3.org/2000/svg" id="cloudSVG_v2_themed">
+<svg width="100" height="65" viewBox="0 0 130 75" xmlns="http://www.w3.org/2000/svg">
     <title>Floating Cloud</title>
     <desc>A medium cloud with distinct round sections.</desc>
     <path id="cloud2Path" d="M 25 65 C 5 65, 5 45, 30 45 C 20 25, 40 15, 60 25 C 80 15, 105 25, 105 45 C 125 45, 125 65, 100 65 Z" fill="CLOUD_FILL_URL_OR_COLOR"/>
@@ -25,7 +23,7 @@ const cloudSvgV2_new = `
 `;
 
 const cloudSvgV3 = `
-<svg width="100" height="70" viewBox="0 0 130 80" xmlns="http://www.w3.org/2000/svg" id="cloudSVG_v3_themed">
+<svg width="100" height="70" viewBox="0 0 130 80" xmlns="http://www.w3.org/2000/svg">
   <title>Soft Cloud Cluster</title>
   <desc>A cluster of small, soft cloud puffs.</desc>
   <defs>
@@ -42,9 +40,8 @@ const cloudSvgV3 = `
 </svg>
 `;
 
-// New Design for V4 - Layered / Drifting look
 const cloudSvgV4_new = `
-<svg width="100" height="60" viewBox="0 0 160 75" xmlns="http://www.w3.org/2000/svg" id="cloudSVG_v4_themed">
+<svg width="100" height="60" viewBox="0 0 160 75" xmlns="http://www.w3.org/2000/svg">
   <title>Layered Drifting Cloud</title>
   <desc>A horizontally oriented cloud with overlapping layers.</desc>
   <g opacity="0.85">
@@ -58,7 +55,7 @@ const cloudSvgV4_new = `
 `;
 
 const cloudSvgV5 = `
-<svg width="100" height="80" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" id="cloudSVG_v5_themed">
+<svg width="100" height="80" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg">
   <title>Bright Top Puff</title>
   <desc>A tall, bright cumulus cloud.</desc>
    <path id="cloud5Body" d="M 20 80 C 0 80, 0 60, 25 60 C 15 40, 30 20, 50 20 C 70 20, 85 40, 75 60 C 100 60, 100 80, 80 80 Z" fill="CLOUD_FILL_URL_OR_COLOR"/>
@@ -68,7 +65,6 @@ const cloudSvgV5 = `
 </svg>
 `;
 
-// Updated array of cloud SVG shape templates
 const cloudShapeSvgs = [
   cloudSvgV1,
   cloudSvgV2_new,
@@ -77,42 +73,36 @@ const cloudShapeSvgs = [
   cloudSvgV5,
 ];
 
-// --- Color Themes ---
 const cloudColorThemes = [
-  // Theme 1: Classic White/BlueSky
   {
     id: "blueSky",
     fill: `url(#gradBlueSky)`,
     gradientDef: `<linearGradient id="gradBlueSky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F0F4F8"/></linearGradient>`,
     textColor: "#555555",
   },
-  // Theme 2: Sunset Orange/Pink
   {
     id: "sunset",
     fill: `url(#gradSunset)`,
     gradientDef: `<linearGradient id="gradSunset" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFDAB9"/><stop offset="50%" stop-color="#FFA07A"/><stop offset="100%" stop-color="#FFC0CB"/></linearGradient>`,
-    textColor: "#8B4513", // SaddleBrown
+    textColor: "#8B4513",
   },
-  // Theme 3: Cool Blue (Replaced Stormy)
   {
     id: "coolBlue",
     fill: `url(#gradCoolBlue)`,
     gradientDef: `<linearGradient id="gradCoolBlue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E0FFFF"/><stop offset="100%" stop-color="#B0E0E6"/></linearGradient>`,
-    textColor: "#191970", // MidnightBlue
+    textColor: "#191970",
   },
-  // Theme 4: Pastel Purple/Lavender
   {
     id: "pastel",
     fill: `url(#gradPastel)`,
     gradientDef: `<radialGradient id="gradPastel" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#E6E6FA"/><stop offset="100%" stop-color="#D8BFD8"/></radialGradient>`,
-    textColor: "#4B0082", // Indigo
+    textColor: "#4B0082",
   },
-  // Theme 5: Simple Light Yellow Solid (Replaced Light Blue)
   {
     id: "lightYellow",
-    fill: "#FFFFE0", // LightYellow solid color
-    gradientDef: "", // No gradient needed for solid color
-    textColor: "#B8860B", // DarkGoldenrod
+    fill: "#FFFFE0",
+    gradientDef: "",
+    textColor: "#B8860B",
   },
 ];
 
@@ -120,6 +110,7 @@ function escapeXml(unsafe) {
   if (typeof unsafe !== "string") {
     return unsafe;
   }
+  // *** Corrected escapeXml function ***
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
       case "<":
@@ -165,23 +156,29 @@ function getRandomCloudSvg(name, descript) {
     `$1${descContent}$3`
   );
 
+  let defsContent = "";
+  if (colorTheme.gradientDef) {
+    defsContent += colorTheme.gradientDef;
+  }
+
+  if (svgMarkup.includes("<defs>")) {
+    svgMarkup = svgMarkup.replace("<defs>", `<defs>${defsContent}`);
+  } else if (defsContent) {
+    svgMarkup = svgMarkup.replace(
+      /(<svg[^>]*>)/,
+      `$1<defs>${defsContent}</defs>`
+    );
+  }
+
   svgMarkup = svgMarkup.replace(/CLOUD_FILL_URL_OR_COLOR/g, colorTheme.fill);
   svgMarkup = svgMarkup.replace(/TEXT_FILL_COLOR/g, colorTheme.textColor);
   svgMarkup = svgMarkup.replace(/TASK_NAME_PLACEHOLDER/g, nameContent);
 
-  if (colorTheme.gradientDef) {
-    if (svgMarkup.includes("<defs>")) {
-      svgMarkup = svgMarkup.replace(
-        "<defs>",
-        `<defs>${colorTheme.gradientDef}`
-      );
-    } else {
-      svgMarkup = svgMarkup.replace(
-        /(<svg[^>]*>)/,
-        `$1<defs>${colorTheme.gradientDef}</defs>`
-      );
-    }
-  }
+  // --- Modify the root <svg> tag to add the consistent ID ---
+  svgMarkup = svgMarkup.replace(
+    /(<svg[^>]*)/,
+    '$1 id="taskCloudIcon"' // Add the fixed id
+  );
 
   return svgMarkup;
 }
