@@ -1,4 +1,4 @@
-import drawTask from "./drawTask.js";
+import drawTask from "./addTask";
 
 const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
 const SHOW_MODAL_BUTTON_SELECTOR = ".newNoteBtn";

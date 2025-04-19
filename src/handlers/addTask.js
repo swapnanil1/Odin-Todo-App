@@ -1,7 +1,7 @@
-import createPlantTaskSVG from "./components/plantComponent.js";
-import createSandCastleSVG from "./components/sandCastleComponent.js";
-import createCloudTaskSVG from "./components/cloudComponent.js";
-import editTask from "./editTask.js";
+import createPlantTaskSVG from "../components/plantComponent.js";
+import createSandCastleSVG from "../components/sandCastleComponent.js";
+import createCloudTaskSVG from "../components/cloudComponent.js";
+import editTask from "./editTaskHandler.js";
 
 export default function drawTask() {
   const priorityInputElement = document.getElementById("priority");

@@ -1,6 +1,6 @@
-import createPlantTaskSVG from "./components/plantComponent.js";
-import createSandCastleSVG from "./components/sandCastleComponent.js";
-import createCloudTaskSVG from "./components/cloudComponent.js";
+import createPlantTaskSVG from "../components/plantComponent.js";
+import createSandCastleSVG from "../components/sandCastleComponent.js";
+import createCloudTaskSVG from "../components/cloudComponent.js";
 
 export default function editTask(
   initialName,
