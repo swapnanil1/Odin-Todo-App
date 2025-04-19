@@ -6,6 +6,7 @@ export default function editTask(
   initialName,
   initialDescription,
   initialPriority,
+  initialDueDate,
   taskListItemElement
 ) {
   const editDialogElement = document.createElement("dialog");
@@ -46,6 +47,19 @@ export default function editTask(
   descriptionTextareaElement.value = initialDescription;
   editTaskForm.appendChild(descriptionTextareaElement);
 
+  editTaskForm.appendChild(document.createElement("br"));
+
+  const dueDateLabelElement = document.createElement("label");
+  dueDateLabelElement.htmlFor = "edit-due-date";
+  dueDateLabelElement.textContent = "Due Date:";
+  editTaskForm.appendChild(dueDateLabelElement);
+
+  const dueDateInputElement = document.createElement("input");
+  dueDateInputElement.type = "date";
+  dueDateInputElement.id = "edit-due-date";
+  dueDateInputElement.name = "due";
+  dueDateInputElement.value = initialDueDate;
+  editTaskForm.appendChild(dueDateInputElement);
   editTaskForm.appendChild(document.createElement("br"));
 
   const priorityLabel = document.createElement("label");
@@ -115,6 +129,7 @@ export default function editTask(
     const updatedName = nameInputElement.value.trim();
     const updatedDescription = descriptionTextareaElement.value.trim();
     const updatedPriority = prioritySelectElement.value;
+    const updatedDueDate = dueDateInputElement.value;
 
     if (!updatedName) {
       alert("Task name cannot be empty.");
@@ -151,6 +166,7 @@ export default function editTask(
       newTaskListItem.dataset.name = updatedName;
       newTaskListItem.dataset.description = updatedDescription;
       newTaskListItem.dataset.priority = updatedPriority;
+      newTaskListItem.dataset.due = updatedDueDate;
       newTaskListItem.classList.add("task-item");
       newTaskListItem.classList.add(`${updatedPriority}-task`);
       newTaskListItem.innerHTML = newTaskSvgMarkup;
@@ -160,6 +176,7 @@ export default function editTask(
           this.dataset.name,
           this.dataset.description,
           this.dataset.priority,
+          this.dataset.due,
           this
         );
       });
@@ -168,6 +185,7 @@ export default function editTask(
     } else {
       taskListItemElement.dataset.name = updatedName;
       taskListItemElement.dataset.description = updatedDescription;
+      taskListItemElement.dataset.due = updatedDueDate;
 
       const nameTextElement =
         taskListItemElement.querySelector(".task-name-text");

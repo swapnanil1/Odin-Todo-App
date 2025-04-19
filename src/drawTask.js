@@ -7,10 +7,12 @@ export default function drawTask() {
   const priorityInputElement = document.getElementById("priority");
   const nameInputElement = document.getElementById("name");
   const descriptionInputElement = document.getElementById("descript");
+  const dueDateInputElement = document.getElementById("due");
 
   const taskPriorityValue = priorityInputElement.value;
   const taskNameValue = nameInputElement.value.trim();
   const taskDescriptionValue = descriptionInputElement.value.trim();
+  const taskDueDateValue = dueDateInputElement.value;
 
   if (!taskNameValue) {
     alert("Please enter a task name.");
@@ -48,6 +50,7 @@ export default function drawTask() {
   taskListItemElement.dataset.name = taskNameValue;
   taskListItemElement.dataset.description = taskDescriptionValue;
   taskListItemElement.dataset.priority = taskPriorityValue;
+  taskListItemElement.dataset.due = taskDueDateValue;
 
   taskListItemElement.classList.add("task-item");
   taskListItemElement.classList.add(`${taskPriorityValue}-task`);
@@ -58,10 +61,12 @@ export default function drawTask() {
     const currentTaskName = this.dataset.name;
     const currentTaskDescription = this.dataset.description;
     const currentTaskPriority = this.dataset.priority;
+    const currentDueDate = this.dataset.due;
     editTask(
       currentTaskName,
       currentTaskDescription,
       currentTaskPriority,
+      currentDueDate,
       this
     );
   });
@@ -70,5 +75,5 @@ export default function drawTask() {
 
   nameInputElement.value = "";
   descriptionInputElement.value = "";
-  // priorityInputElement.value = "lowp";
+  dueDateInputElement.value = "";
 }
