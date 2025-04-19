@@ -35,5 +35,8 @@ body {
   /* let newTaskBtn be smaller than  */
   max-height: 2rem;
 }
-
+/* The content section  */
+#content ul li {
+  list-style: none;
+}
 /* The Input Form Model */
