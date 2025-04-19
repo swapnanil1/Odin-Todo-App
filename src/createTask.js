@@ -1,57 +1,57 @@
 import drawTask from "./drawTask.js";
 
-const MODAL_SELECTOR = ".newNoteModal";
-const OPEN_BUTTON_SELECTOR = ".newNoteBtn";
-const CLOSE_BUTTON_SELECTOR = ".closeBtn";
-const FORM_ID = "newNoteForm";
+const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
+const SHOW_MODAL_BUTTON_SELECTOR = ".newNoteBtn";
+const CLOSE_MODAL_BUTTON_SELECTOR = ".closeBtn";
+const NEW_TASK_FORM_ID = "newNoteForm";
 
 function initializeCreateTaskModal() {
-  const newTaskModal = document.querySelector(MODAL_SELECTOR);
-  const openModalButton = document.querySelector(OPEN_BUTTON_SELECTOR);
-  const closeModalButton = document.querySelector(CLOSE_BUTTON_SELECTOR);
-  const newTaskForm = document.getElementById(FORM_ID);
+  const newTaskModalElement = document.querySelector(NEW_TASK_MODAL_SELECTOR);
+  const showModalButton = document.querySelector(SHOW_MODAL_BUTTON_SELECTOR);
+  const closeModalButton = document.querySelector(CLOSE_MODAL_BUTTON_SELECTOR);
+  const newTaskFormElement = document.getElementById(NEW_TASK_FORM_ID);
 
-  if (!newTaskModal) {
+  if (!newTaskModalElement) {
     console.error(
-      `Error: Could not find modal element with selector "${MODAL_SELECTOR}".`
+      `Error: Could not find modal element with selector "${NEW_TASK_MODAL_SELECTOR}".`
     );
     return;
   }
-  if (!openModalButton) {
+  if (!showModalButton) {
     console.error(
-      `Error: Could not find open button element with selector "${OPEN_BUTTON_SELECTOR}".`
+      `Error: Could not find show modal button element with selector "${SHOW_MODAL_BUTTON_SELECTOR}".`
     );
   }
   if (!closeModalButton) {
     console.warn(
-      `Warning: Could not find close button element with selector "${CLOSE_BUTTON_SELECTOR}".`
+      `Warning: Could not find close modal button element with selector "${CLOSE_MODAL_BUTTON_SELECTOR}".`
     );
   }
-  if (!newTaskForm) {
+  if (!newTaskFormElement) {
     console.error(
-      `Error: Could not find form element with ID "${FORM_ID}". Task creation will not work.`
+      `Error: Could not find form element with ID "${NEW_TASK_FORM_ID}". Task creation will not work.`
     );
     return;
   }
 
-  if (openModalButton) {
-    openModalButton.addEventListener("click", () => {
-      newTaskModal.showModal();
+  if (showModalButton) {
+    showModalButton.addEventListener("click", () => {
+      newTaskModalElement.showModal();
     });
   }
 
   if (closeModalButton) {
     closeModalButton.addEventListener("click", () => {
-      newTaskModal.close();
+      newTaskModalElement.close();
     });
   }
 
-  newTaskForm.addEventListener("submit", function (event) {
+  newTaskFormElement.addEventListener("submit", function (event) {
     event.preventDefault();
 
     try {
       drawTask();
-      newTaskModal.close();
+      newTaskModalElement.close();
     } catch (error) {
       console.error("Error occurred during task creation:", error);
       alert(
