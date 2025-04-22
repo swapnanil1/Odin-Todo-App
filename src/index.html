@@ -17,6 +17,22 @@
           <!-- shows low med high priority tasks in details -->
         </section>
         <section class="projects">
+          <h2>
+            Projects
+            <span>
+              <button type="button" id="newProjectBtn">+</button>
+            </span>
+          </h2>
+          <ul></ul>
+          <dialog class="newProjectModal">
+            <form id="newProjectForm" action="" method="">
+              <label for="projectName">Project Name:</label>
+              <input type="text" id="projectName" /><br />
+              <button type="submit">Submit</button>
+              <button type="button" class="newProjectCloseBtn">Close</button>
+            </form>
+          </dialog>
+
           <!-- <ul> lists projects via dom and dynamically adds them here and inside newNoteModal
             <li>Personal</li>
             <li>Work</li>
@@ -29,7 +45,12 @@
           <!-- lists upcomming tasks according to due dates -->
         </section>
         <section class="newTask">
-          <button class="newNoteBtn" type="button">Create New Note</button>
+          <h2>
+            New Task
+            <span>
+              <button class="newNoteBtn" type="button">+</button>
+            </span>
+          </h2>
         </section>
       </aside>
       <!-- The Input Modal -->
@@ -57,7 +78,7 @@
             <option>Grocery</option>
           </select>
           <button type="submit">Submit</button>
-          <button type="button" class="closeBtn">Close</button>
+          <button type="button" class="newNoteCloseBtn">Close</button>
         </form>
       </dialog>
     </div>
