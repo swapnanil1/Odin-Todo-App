@@ -64,12 +64,14 @@ export default function drawTask() {
     const currentTaskName = this.dataset.name;
     const currentTaskDescription = this.dataset.description;
     const currentTaskPriority = this.dataset.priority;
-    const currentDueDate = this.dataset.due;
+    const currentTaskDueDate = this.dataset.due;
+    const currentTaskProject = this.dataset.project;
     editTask(
       currentTaskName,
       currentTaskDescription,
       currentTaskPriority,
-      currentDueDate,
+      currentTaskDueDate,
+      currentTaskProject,
       this
     );
   });

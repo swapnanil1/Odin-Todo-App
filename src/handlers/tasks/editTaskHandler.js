@@ -1,12 +1,14 @@
 import createPlantTaskSVG from "../../components/plantComponent.js";
 import createSandCastleSVG from "../../components/sandCastleComponent.js";
 import createCloudTaskSVG from "../../components/cloudComponent.js";
+import refreshProjects from "../projects/getProjects.js";
 
 export default function editTask(
   initialName,
   initialDescription,
   initialPriority,
   initialDueDate,
+  initialProject,
   taskListItemElement
 ) {
   const editDialogElement = document.createElement("dialog");
@@ -32,7 +34,6 @@ export default function editTask(
   nameInputElement.value = initialName;
   nameInputElement.required = true;
   editTaskForm.appendChild(nameInputElement);
-
   editTaskForm.appendChild(document.createElement("br"));
 
   const descriptionLabel = document.createElement("label");
@@ -46,7 +47,6 @@ export default function editTask(
   descriptionTextareaElement.rows = "4";
   descriptionTextareaElement.value = initialDescription;
   editTaskForm.appendChild(descriptionTextareaElement);
-
   editTaskForm.appendChild(document.createElement("br"));
 
   const dueDateLabelElement = document.createElement("label");
@@ -87,7 +87,46 @@ export default function editTask(
     prioritySelectElement.appendChild(optionElement);
   });
   editTaskForm.appendChild(prioritySelectElement);
+  editTaskForm.appendChild(document.createElement("br"));
+  editTaskForm.appendChild(document.createElement("br"));
 
+  const projectLabel = document.createElement("label");
+  projectLabel.htmlFor = "edit-project-select";
+  projectLabel.textContent = "Project:";
+  editTaskForm.appendChild(projectLabel);
+
+  const projectSelectElement = document.createElement("select");
+  projectSelectElement.id = "edit-project-select";
+  projectSelectElement.name = "project";
+
+  try {
+    const projectOptions = refreshProjects();
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "Default";
+    defaultOption.textContent = "Default";
+    if (!initialProject) {
+      defaultOption.selected = true;
+    }
+    projectSelectElement.appendChild(defaultOption);
+
+    projectOptions.forEach((projectName) => {
+      const optionElement = document.createElement("option");
+      optionElement.value = projectName;
+      optionElement.textContent = projectName;
+      if (projectName === initialProject) {
+        optionElement.selected = true;
+      }
+      projectSelectElement.appendChild(optionElement);
+    });
+  } catch (error) {
+    console.error("Error loading the projects for edit modal:", error);
+    const errorOption = document.createElement("option");
+    errorOption.textContent = "Error loading user's projects";
+    errorOption.disabled = true;
+    projectSelectElement.appendChild(errorOption);
+  }
+  editTaskForm.appendChild(projectSelectElement);
   editTaskForm.appendChild(document.createElement("br"));
   editTaskForm.appendChild(document.createElement("br"));
 
@@ -130,6 +169,7 @@ export default function editTask(
     const updatedDescription = descriptionTextareaElement.value.trim();
     const updatedPriority = prioritySelectElement.value;
     const updatedDueDate = dueDateInputElement.value;
+    const updatedProject = projectSelectElement.value;
 
     if (!updatedName) {
       alert("Task name cannot be empty.");
@@ -138,8 +178,6 @@ export default function editTask(
     }
 
     if (updatedPriority !== initialPriority) {
-      taskListItemElement.remove();
-
       let newTargetListElement;
       let newTaskSvgMarkup;
 
@@ -159,14 +197,18 @@ export default function editTask(
           `Error: Could not find target list for new priority: ${updatedPriority}`
         );
         alert("Error: Could not move task. Target list not found.");
+        event.preventDefault();
         return;
       }
+
+      taskListItemElement.remove();
 
       const newTaskListItem = document.createElement("li");
       newTaskListItem.dataset.name = updatedName;
       newTaskListItem.dataset.description = updatedDescription;
       newTaskListItem.dataset.priority = updatedPriority;
       newTaskListItem.dataset.due = updatedDueDate;
+      newTaskListItem.dataset.project = updatedProject;
       newTaskListItem.classList.add("task-item");
       newTaskListItem.classList.add(`${updatedPriority}-task`);
       newTaskListItem.innerHTML = newTaskSvgMarkup;
@@ -177,6 +219,7 @@ export default function editTask(
           this.dataset.description,
           this.dataset.priority,
           this.dataset.due,
+          this.dataset.project,
           this
         );
       });
@@ -186,38 +229,19 @@ export default function editTask(
       taskListItemElement.dataset.name = updatedName;
       taskListItemElement.dataset.description = updatedDescription;
       taskListItemElement.dataset.due = updatedDueDate;
+      taskListItemElement.dataset.project = updatedProject;
 
-      const nameTextElement =
-        taskListItemElement.querySelector(".task-name-text");
-      if (nameTextElement) {
-        nameTextElement.textContent = updatedName;
+      let updatedSvgMarkup;
+      if (initialPriority === "lowp") {
+        updatedSvgMarkup = createPlantTaskSVG(updatedName, updatedDescription);
+      } else if (initialPriority === "medp") {
+        updatedSvgMarkup = createSandCastleSVG(updatedName, updatedDescription);
       } else {
-        taskListItemElement.innerHTML = "";
-        if (initialPriority === "lowp")
-          taskListItemElement.innerHTML = createPlantTaskSVG(
-            updatedName,
-            updatedDescription
-          );
-        else if (initialPriority === "medp")
-          taskListItemElement.innerHTML = createSandCastleSVG(
-            updatedName,
-            updatedDescription
-          );
-        else
-          taskListItemElement.innerHTML = createCloudTaskSVG(
-            updatedName,
-            updatedDescription
-          );
+        updatedSvgMarkup = createCloudTaskSVG(updatedName, updatedDescription);
       }
-
-      const descriptionTextElement =
-        taskListItemElement.querySelector(".task-desc-text");
-      if (descriptionTextElement) {
-        descriptionTextElement.textContent = updatedDescription;
-      }
+      taskListItemElement.innerHTML = updatedSvgMarkup;
 
       headingElement.textContent = `Edit Task: ${updatedName}`;
-      alert("Task Updated!");
     }
   });
 
