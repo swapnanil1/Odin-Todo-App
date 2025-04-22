@@ -1,6 +1,6 @@
-import createPlantTaskSVG from "../components/plantComponent.js";
-import createSandCastleSVG from "../components/sandCastleComponent.js";
-import createCloudTaskSVG from "../components/cloudComponent.js";
+import createPlantTaskSVG from "../../components/plantComponent.js";
+import createSandCastleSVG from "../../components/sandCastleComponent.js";
+import createCloudTaskSVG from "../../components/cloudComponent.js";
 import editTask from "./editTaskHandler.js";
 
 export default function drawTask() {
@@ -8,11 +8,13 @@ export default function drawTask() {
   const nameInputElement = document.getElementById("name");
   const descriptionInputElement = document.getElementById("descript");
   const dueDateInputElement = document.getElementById("due");
+  const projectListSelector = document.getElementById("projectList");
 
   const taskPriorityValue = priorityInputElement.value;
   const taskNameValue = nameInputElement.value.trim();
   const taskDescriptionValue = descriptionInputElement.value.trim();
   const taskDueDateValue = dueDateInputElement.value;
+  const projectSelectedValue = projectListSelector.value;
 
   if (!taskNameValue) {
     alert("Please enter a task name.");
@@ -51,6 +53,7 @@ export default function drawTask() {
   taskListItemElement.dataset.description = taskDescriptionValue;
   taskListItemElement.dataset.priority = taskPriorityValue;
   taskListItemElement.dataset.due = taskDueDateValue;
+  taskListItemElement.dataset.project = projectSelectedValue;
 
   taskListItemElement.classList.add("task-item");
   taskListItemElement.classList.add(`${taskPriorityValue}-task`);
@@ -77,3 +80,4 @@ export default function drawTask() {
   descriptionInputElement.value = "";
   dueDateInputElement.value = "";
 }
+export {};

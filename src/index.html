@@ -32,14 +32,6 @@
               <button type="button" class="newProjectCloseBtn">Close</button>
             </form>
           </dialog>
-
-          <!-- <ul> lists projects via dom and dynamically adds them here and inside newNoteModal
-            <li>Personal</li>
-            <li>Work</li>
-            <li>Hobbies</li>
-            <li>Hobbies</li>
-            <li>Grocery</li>
-          </ul> -->
         </section>
         <section class="upcoming">
           <!-- lists upcomming tasks according to due dates -->
@@ -69,13 +61,14 @@
             <option value="highp">High Priority</option>
           </select>
           <legend>Projects</legend>
-          <select id="projects" name="projects">
+          <select id="projectList" name="projects">
             <!-- later add proper dom to attach them here and list project inside
             projectSection -->
-            <option selected>Personal</option>
+            <option selected>None</option>
+            <!-- <option selected>Personal</option>
             <option>Work</option>
             <option>Hobbies</option>
-            <option>Grocery</option>
+            <option>Grocery</option> -->
           </select>
           <button type="submit">Submit</button>
           <button type="button" class="newNoteCloseBtn">Close</button>

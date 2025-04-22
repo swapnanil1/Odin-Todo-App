@@ -1,15 +1,32 @@
 import drawTask from "./addTask";
+import refreshProjects from "../projects/getProjects.js";
 
 const SHOW_MODAL_BUTTON_SELECTOR = ".newNoteBtn";
 const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
 const NEW_TASK_FORM_ID = "newNoteForm";
 const CLOSE_MODAL_BUTTON_SELECTOR = ".newNoteCloseBtn";
-
+const LIST_OF_PROJECTS = "projectList";
 function initializeCreateTaskModal() {
   const showModalButton = document.querySelector(SHOW_MODAL_BUTTON_SELECTOR);
   const newTaskModalElement = document.querySelector(NEW_TASK_MODAL_SELECTOR);
   const newTaskFormElement = document.getElementById(NEW_TASK_FORM_ID);
   const closeModalButton = document.querySelector(CLOSE_MODAL_BUTTON_SELECTOR);
+  const projectListSelector = document.getElementById(LIST_OF_PROJECTS);
+
+  function createProjectEntries() {
+    // Clears all existing options except the first one aka "None"
+    while (projectListSelector.options.length > 1) {
+      projectListSelector.remove(1);
+    }
+
+    const projectNames = refreshProjects();
+    projectNames.forEach((project) => {
+      const option = document.createElement("option");
+      option.textContent = project;
+      option.value = project;
+      projectListSelector.appendChild(option);
+    });
+  }
 
   if (!newTaskModalElement) {
     console.error(
@@ -36,6 +53,7 @@ function initializeCreateTaskModal() {
 
   if (showModalButton) {
     showModalButton.addEventListener("click", () => {
+      createProjectEntries();
       newTaskModalElement.showModal();
     });
   }

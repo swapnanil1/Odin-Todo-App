@@ -1,9 +1,10 @@
 import addNewProject from "./addProject";
+import refreshProjects from "./getProjects";
 export default function newProject() {
   const newProjectBtn = document.getElementById("newProjectBtn");
   const newProjectFormEle = document.getElementById("newProjectForm");
   const newProjectModal = document.querySelector(".newProjectModal");
-
+  const projectNameEle = document.getElementById("projectName");
   newProjectBtn.addEventListener("click", () => {
     newProjectModal.showModal();
   });
@@ -14,8 +15,9 @@ export default function newProject() {
   newProjectFormEle.addEventListener("submit", (e) => {
     e.preventDefault();
     try {
-      addNewProject();
+      addNewProject(projectNameEle);
       newProjectModal.close();
+      projectNameEle.value = "";
     } catch (error) {
       console.error("Error occurred during project creation:", error);
       alert(
@@ -23,4 +25,14 @@ export default function newProject() {
       );
     }
   });
+
+  const Personal = document.createElement("input");
+  Personal.value = "Personal";
+  addNewProject(Personal);
+  const Work = document.createElement("input");
+  Work.value = "Work";
+  addNewProject(Work);
+  const Hobbies = document.createElement("input");
+  Hobbies.value = "Hobbies";
+  addNewProject(Hobbies);
 }
