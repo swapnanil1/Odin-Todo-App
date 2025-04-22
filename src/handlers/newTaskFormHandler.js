@@ -1,15 +1,15 @@
 import drawTask from "./addTask";
 
-const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
 const SHOW_MODAL_BUTTON_SELECTOR = ".newNoteBtn";
-const CLOSE_MODAL_BUTTON_SELECTOR = ".closeBtn";
+const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
 const NEW_TASK_FORM_ID = "newNoteForm";
+const CLOSE_MODAL_BUTTON_SELECTOR = ".newNoteCloseBtn";
 
 function initializeCreateTaskModal() {
-  const newTaskModalElement = document.querySelector(NEW_TASK_MODAL_SELECTOR);
   const showModalButton = document.querySelector(SHOW_MODAL_BUTTON_SELECTOR);
-  const closeModalButton = document.querySelector(CLOSE_MODAL_BUTTON_SELECTOR);
+  const newTaskModalElement = document.querySelector(NEW_TASK_MODAL_SELECTOR);
   const newTaskFormElement = document.getElementById(NEW_TASK_FORM_ID);
+  const closeModalButton = document.querySelector(CLOSE_MODAL_BUTTON_SELECTOR);
 
   if (!newTaskModalElement) {
     console.error(
