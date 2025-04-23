@@ -1,82 +1,126 @@
-import drawTask from "./addTask";
-import refreshProjects from "../projects/getProjects.js";
+// --- Imports ---
+import { getProjects, addTask as addTaskData } from "../dataStore.js"; // Data functions
+import { renderTasks } from "../uiRenderer.js"; // UI update function
 
+// --- Constants ---
 const SHOW_MODAL_BUTTON_SELECTOR = ".newNoteBtn";
 const NEW_TASK_MODAL_SELECTOR = ".newNoteModal";
 const NEW_TASK_FORM_ID = "newNoteForm";
 const CLOSE_MODAL_BUTTON_SELECTOR = ".newNoteCloseBtn";
-const LIST_OF_PROJECTS = "projectList";
-function initializeCreateTaskModal() {
+const LIST_OF_PROJECTS_ID = "projectList";
+
+// Sets up the handlers for the "New Task" modal button and form.
+export default function initializeCreateTaskModal() {
+  // --- Get Elements ---
   const showModalButton = document.querySelector(SHOW_MODAL_BUTTON_SELECTOR);
   const newTaskModalElement = document.querySelector(NEW_TASK_MODAL_SELECTOR);
   const newTaskFormElement = document.getElementById(NEW_TASK_FORM_ID);
-  const closeModalButton = document.querySelector(CLOSE_MODAL_BUTTON_SELECTOR);
-  const projectListSelector = document.getElementById(LIST_OF_PROJECTS);
+  const closeModalButton = newTaskModalElement?.querySelector(
+    CLOSE_MODAL_BUTTON_SELECTOR
+  );
+  const projectListSelector = document.getElementById(LIST_OF_PROJECTS_ID);
 
-  function createProjectEntries() {
-    // Clears all existing options except the first one aka "None"
-    while (projectListSelector.options.length > 1) {
-      projectListSelector.remove(1);
-    }
+  // Exit if essential elements are missing.
+  if (
+    !showModalButton ||
+    !newTaskModalElement ||
+    !newTaskFormElement ||
+    !projectListSelector
+  ) {
+    console.error(
+      "Cannot initialize New Task Modal: Missing critical elements."
+    );
+    return;
+  }
 
-    const projectNames = refreshProjects();
+  // Populates the project dropdown in the modal.
+  function populateProjectDropdown() {
+    const currentSelectedValue = projectListSelector.value; // Preserve selection
+    projectListSelector.innerHTML = ""; // Clear options
+    const projectNames = getProjects(); // Get current projects
     projectNames.forEach((project) => {
       const option = document.createElement("option");
       option.textContent = project;
       option.value = project;
+      if (project === currentSelectedValue) option.selected = true; // Reselect if possible
       projectListSelector.appendChild(option);
     });
+    if (!projectListSelector.value && projectNames.includes("Default")) {
+      projectListSelector.value = "Default"; // Ensure default selection
+    }
   }
 
-  if (!newTaskModalElement) {
-    console.error(
-      `Error: Could not find modal element with selector "${NEW_TASK_MODAL_SELECTOR}".`
-    );
-    return;
-  }
-  if (!showModalButton) {
-    console.error(
-      `Error: Could not find show modal button element with selector "${SHOW_MODAL_BUTTON_SELECTOR}".`
-    );
-  }
-  if (!closeModalButton) {
-    console.warn(
-      `Warning: Could not find close modal button element with selector "${CLOSE_MODAL_BUTTON_SELECTOR}".`
-    );
-  }
-  if (!newTaskFormElement) {
-    console.error(
-      `Error: Could not find form element with ID "${NEW_TASK_FORM_ID}". Task creation will not work.`
-    );
-    return;
-  }
+  // --- Event Listeners ---
 
-  if (showModalButton) {
-    showModalButton.addEventListener("click", () => {
-      createProjectEntries();
-      newTaskModalElement.showModal();
-    });
-  }
+  // Show modal button listener.
+  showModalButton.addEventListener("click", () => {
+    populateProjectDropdown(); // Refresh projects dropdown
+    newTaskFormElement.reset(); // Reset form fields
 
+    // Set default selections
+    const defaultPriority = newTaskFormElement.querySelector(
+      '#priority option[value="lowp"]'
+    );
+    if (defaultPriority) defaultPriority.selected = true;
+    const defaultProject = projectListSelector.querySelector(
+      'option[value="Default"]'
+    );
+    if (defaultProject) defaultProject.selected = true;
+
+    newTaskModalElement.showModal(); // Show the dialog
+    document.getElementById("name")?.focus(); // Focus name input
+  });
+
+  // Close modal button listener (or backdrop click).
   if (closeModalButton) {
-    closeModalButton.addEventListener("click", () => {
-      newTaskModalElement.close();
+    closeModalButton.addEventListener("click", () =>
+      newTaskModalElement.close()
+    );
+  } else {
+    newTaskModalElement.addEventListener("click", (event) => {
+      // Fallback close
+      if (event.target === newTaskModalElement) newTaskModalElement.close();
     });
   }
 
+  // Form submission listener.
   newTaskFormElement.addEventListener("submit", function (event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent page reload
 
-    try {
-      drawTask();
-      newTaskModalElement.close();
-    } catch (error) {
-      console.error("Error occurred during task creation:", error);
-      alert(
-        "An error occurred while adding the task. Please check the console."
-      );
+    // Get form values.
+    const taskNameValue = document.getElementById("name").value.trim();
+    const taskDescriptionValue = document
+      .getElementById("descript")
+      .value.trim();
+    const taskDueDateValue = document.getElementById("due").value;
+    const taskPriorityValue = document.getElementById("priority").value;
+    const projectSelectedValue = projectListSelector.value;
+
+    // Validate name.
+    if (!taskNameValue) {
+      alert("Please enter a task name.");
+      document.getElementById("name").focus();
+      return; // Stop if invalid
+    }
+
+    // Prepare task data object.
+    const newTaskData = {
+      name: taskNameValue,
+      description: taskDescriptionValue,
+      due: taskDueDateValue,
+      priority: taskPriorityValue,
+      project: projectSelectedValue || "Default",
+    };
+
+    // Add task to data store.
+    const addedTask = addTaskData(newTaskData);
+
+    // Handle result.
+    if (addedTask) {
+      renderTasks(); // Update displayed tasks
+      newTaskModalElement.close(); // Close dialog
+    } else {
+      alert("Failed to add task. Please check data."); // Inform user on failure
     }
   });
 }
-
-export default initializeCreateTaskModal;
