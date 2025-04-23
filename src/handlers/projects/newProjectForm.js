@@ -1,5 +1,4 @@
 import addNewProject from "./addProject";
-import refreshProjects from "./getProjects";
 export default function newProject() {
   const newProjectBtn = document.getElementById("newProjectBtn");
   const newProjectFormEle = document.getElementById("newProjectForm");

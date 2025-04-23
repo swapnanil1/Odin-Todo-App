@@ -1,5 +1,5 @@
 export default function drawProject(name) {
-  // lists the projects as a li
+  // lists the projects as a li and getProject hooks into this list to fetch updated projects
   const projectNameVal = name.value.trim();
   const projectList = document.querySelector(".projects ul");
   const aProject = document.createElement("li");
