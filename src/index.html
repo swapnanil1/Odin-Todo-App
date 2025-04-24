@@ -3,71 +3,172 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDo</title>
+    <!-- Link your CSS file -->
+    <title>ToDo App - Refreshed</title>
   </head>
   <body>
-    <div id="container">
-      <main id="content">
-        <section id="highp"><ul></ul></section>
-        <section id="medp"><ul></ul></section>
-        <section id="lowp"><ul></ul></section>
-      </main>
-      <aside id="sidebar">
-        <section class="sortByPriorities">
-          <!-- shows low med high priority tasks in details -->
+    <div class="app-container">
+      <!-- Sidebar for Navigation, Projects, and Actions -->
+      <aside class="app-sidebar">
+        <!-- Section for main navigation/views (Optional but good structure) -->
+        <section class="sidebar-section sidebar-navigation">
+          <h2>View Tasks</h2>
+          <nav>
+            <ul>
+              <!-- Example View Links - JS would handle clicks -->
+              <li>
+                <button type="button" class="nav-button" data-view="all">
+                  All Tasks
+                </button>
+              </li>
+              <li>
+                <button type="button" class="nav-button" data-view="upcoming">
+                  Upcoming
+                </button>
+              </li>
+              <!-- Add more views if needed -->
+            </ul>
+          </nav>
         </section>
-        <section class="projects">
-          <h2>
-            Projects
-            <span>
-              <button type="button" id="newProjectBtn">+</button>
-            </span>
-          </h2>
-          <ul></ul>
-          <dialog class="newProjectModal">
-            <form id="newProjectForm" action="" method="">
-              <label for="projectName">Project Name:</label>
-              <input type="text" id="projectName" /><br />
-              <button type="submit">Submit</button>
-              <button type="button" class="newProjectCloseBtn">Close</button>
-            </form>
-          </dialog>
+
+        <!-- Section for Projects -->
+        <section class="sidebar-section sidebar-projects">
+          <header class="section-header">
+            <h2>Projects</h2>
+            <button type="button" id="add-project-btn" title="Add New Project">
+              +
+            </button>
+          </header>
+          <ul id="project-list">
+            <!-- Project list items (like <li>Default</li>, <li>Work</li>) will be added here by JS -->
+          </ul>
         </section>
-        <section class="upcoming">
-          <!-- lists upcomming tasks according to due dates -->
-        </section>
-        <section class="newTask">
-          <h2>
-            New Task
-            <span>
-              <button class="newNoteBtn" type="button">+</button>
-            </span>
-          </h2>
+
+        <!-- Section for Actions -->
+        <section class="sidebar-section sidebar-actions">
+          <h2>Actions</h2>
+          <button type="button" id="add-task-btn" class="button-primary">
+            Add New Task
+          </button>
         </section>
       </aside>
-      <!-- The Input Modal -->
-      <dialog class="newNoteModal">
-        <form id="newNoteForm" action="" method="">
-          <label for="name">Name</label>
-          <input type="text" id="name" /><br /><br />
-          <label for="descript">Description</label>
-          <input type="text" id="descript" /><br /><br />
-          <label for="due">Due Date</label>
-          <input type="date" id="due" /><br /><br />
-          <legend>Priority</legend>
-          <select name="priority" id="priority">
-            <option value="lowp">Low Priority</option>
-            <option value="medp">Medium Priority</option>
-            <option value="highp">High Priority</option>
-          </select>
-          <legend>Projects</legend>
-          <select id="projectList" name="projects">
-            <option selected>Default</option>
-          </select>
-          <button type="submit">Submit</button>
-          <button type="button" class="newNoteCloseBtn">Close</button>
-        </form>
-      </dialog>
+
+      <!-- Main Content Area for Displaying Tasks -->
+      <main class="app-content">
+        <h1>Tasks</h1>
+        <!-- Sections for each priority -->
+        <section id="priority-high" class="task-priority-section">
+          <h2>High Priority</h2>
+          <ul id="high-priority-tasks" class="task-list">
+            <!-- High priority task items will be added here by JS -->
+          </ul>
+        </section>
+
+        <section id="priority-medium" class="task-priority-section">
+          <h2>Medium Priority</h2>
+          <ul id="medium-priority-tasks" class="task-list">
+            <!-- Medium priority task items will be added here by JS -->
+          </ul>
+        </section>
+
+        <section id="priority-low" class="task-priority-section">
+          <h2>Low Priority</h2>
+          <ul id="low-priority-tasks" class="task-list">
+            <!-- Low priority task items will be added here by JS -->
+          </ul>
+        </section>
+      </main>
     </div>
+
+    <!-- Modals (can be placed outside the main container for stacking context) -->
+
+    <!-- Add/Edit Task Modal -->
+    <dialog id="task-modal" class="modal">
+      <form id="task-form" method="dialog">
+        <h2 id="task-modal-title">Add New Task</h2>
+        <!-- Use unique IDs even for edit modal fields if reusing structure, JS will populate -->
+        <div class="form-group">
+          <label for="task-name-input">Task Name:</label>
+          <input type="text" id="task-name-input" name="taskName" required />
+        </div>
+        <div class="form-group">
+          <label for="task-desc-input">Description:</label>
+          <textarea
+            id="task-desc-input"
+            name="taskDescription"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="task-due-input">Due Date:</label>
+          <input type="date" id="task-due-input" name="taskDueDate" />
+        </div>
+        <div class="form-group">
+          <label for="task-priority-select">Priority:</label>
+          <select id="task-priority-select" name="taskPriority">
+            <option value="lowp">Low</option>
+            <option value="medp" selected>Medium</option>
+            <!-- Example default -->
+            <option value="highp">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="task-project-select">Project:</label>
+          <select id="task-project-select" name="taskProject">
+            <!-- Project options will be populated by JS -->
+            <option value="Default">Default</option>
+          </select>
+        </div>
+        <!-- Hidden input for task ID during edits - JS will manage this -->
+        <input type="hidden" id="task-id-input" name="taskId" />
+
+        <div class="modal-controls">
+          <button type="button" class="button-secondary" id="task-cancel-btn">
+            Cancel
+          </button>
+          <button type="submit" class="button-primary" id="task-submit-btn">
+            Save Task
+          </button>
+          <!-- Delete button specifically for edit mode - JS can show/hide -->
+          <button
+            type="button"
+            class="button-danger"
+            id="task-delete-btn"
+            style="display: none"
+          >
+            Delete Task
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Add Project Modal -->
+    <dialog id="add-project-modal" class="modal">
+      <form id="add-project-form" method="dialog">
+        <h2>Add New Project</h2>
+        <div class="form-group">
+          <label for="project-name-input">Project Name:</label>
+          <input
+            type="text"
+            id="project-name-input"
+            name="projectName"
+            required
+          />
+        </div>
+        <div class="modal-controls">
+          <button
+            type="button"
+            class="button-secondary"
+            id="add-project-cancel-btn"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="button-primary">Add Project</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Link your JavaScript file -->
+    <script type="module" src="main.js"></script>
   </body>
 </html>
