@@ -7,6 +7,7 @@ export default function addTaskMenu() {
   const addTaskBtn = document.getElementById("add-task-btn");
   const TaskModalForm = document.getElementById("task-form");
   addTaskBtn.addEventListener("click", () => {
+    renderTasks(getAllTasks());
     console.log("Adding Task");
     TaskModal.showModal();
   });

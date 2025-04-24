@@ -7,6 +7,8 @@ body {
   padding: 0;
   font-family: sans-serif; /* Add a basic font */
   box-sizing: border-box;
+  background-color: #333;
+  color: #FFF;
 }
 
 *,
@@ -43,7 +45,7 @@ body {
   border: 1px solid #e0e0e0; /* Lighter border */
   margin-bottom: 20px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #333;
   border-radius: 5px;
 }
 .task-priority-section h2 {
@@ -76,7 +78,6 @@ body {
   flex-direction: column;
   width: 250px; /* Slightly wider maybe */
   flex-shrink: 0; /* Prevent sidebar from shrinking */
-  background-color: #f4f4f4;
   border-right: 1px solid #ccc;
   padding: 15px;
   overflow-y: auto; /* Allow sidebar scroll if content exceeds height */
@@ -91,7 +92,6 @@ body {
   font-size: 1.1em;
   margin-top: 0;
   margin-bottom: 10px;
-  color: #333;
 }
 
 /* Header within sidebar sections (e.g., Projects + Add button) */
@@ -102,6 +102,7 @@ body {
   margin-bottom: 10px;
 }
 .section-header h2 {
+  color: #FFF;
   margin: 0; /* Remove margin if inside flex header */
 }
 #add-project-btn, #add-task-btn /* Style action buttons */ {
@@ -139,6 +140,7 @@ body {
   margin: 0;
 }
 .sidebar-navigation nav li button.nav-button {
+  color: #fff;
   background: none;
   border: none;
   padding: 8px 5px;
