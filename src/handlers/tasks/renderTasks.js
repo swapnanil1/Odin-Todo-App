@@ -1,6 +1,7 @@
 import createPlantSVG from "../../components/plantComponent.js";
 import createSandCastleSVG from "../../components/sandCastleComponent.js";
 import createCloudSVG from "../../components/cloudComponent.js";
+import resetTasksEvents from "./resetTasksEvents.js";
 export default function renderTasks(currentTaskState) {
   // if currentTaskStateisempty return
   if (!currentTaskState || currentTaskState.length === 0) {
@@ -16,7 +17,7 @@ export default function renderTasks(currentTaskState) {
   currentTaskState.forEach((task) => {
     const taskListItemElement = document.createElement("li");
 
-    taskListItemElement.dataset.name = task.title;
+    taskListItemElement.dataset.title = task.title;
     taskListItemElement.dataset.description = task.description;
     taskListItemElement.dataset.priority = task.priority;
     taskListItemElement.dataset.due = task.dueDate;
@@ -42,4 +43,5 @@ export default function renderTasks(currentTaskState) {
     taskListItemElement.innerHTML = taskSvgMarkup;
     targetListElement.appendChild(taskListItemElement);
   });
+  resetTasksEvents();
 }

@@ -1,5 +1,5 @@
 import createTask from "./createTask.js";
-import taskStorage from "./taskStorage.js";
+import { getAllTasks } from "./taskStorage.js";
 import renderTasks from "./renderTasks.js";
 export default function addTaskMenu() {
   // works with the task modal and form
@@ -17,14 +17,9 @@ export default function addTaskMenu() {
   });
   TaskModalForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    taskStorage("w", createTask(taskStorage()));
-    // Updates the stored task state by adding a new task.
-    // - taskStorage() retrieves the current saved state (initially [])
-    // - createTask(...) adds a new task to that state
-    // - taskStorage(w,...) saves the updated state
-    console.log(taskStorage());
+    createTask();
     TaskModal.close();
-    renderTasks(taskStorage());
-    console.log("Created Task");
+    renderTasks(getAllTasks());
+    console.log(getAllTasks());
   });
 }
