@@ -69,7 +69,7 @@ body {
   cursor: pointer;
 }
 .task-item:hover {
-  background-color: #f0f0f0;
+  background-color: #666666;
 }
 
 /* Sidebar */
@@ -125,7 +125,7 @@ body {
   margin-bottom: 5px; /* Optional spacing */
 }
 #project-list li:hover {
-  background-color: #e0e0e0;
+  background-color: #666666;
 }
 #project-list li.active-filter {
   /* Style for active project filter */
@@ -150,7 +150,7 @@ body {
   border-radius: 3px;
 }
 .sidebar-navigation nav li button.nav-button:hover {
-  background-color: #e0e0e0;
+  background-color: #666666;
 }
 
 /* Basic Modal Styling */
