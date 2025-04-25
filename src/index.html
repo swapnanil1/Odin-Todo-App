@@ -106,8 +106,8 @@
         <div class="form-group">
           <label for="task-priority-select">Priority:</label>
           <select id="task-priority-select" name="taskPriority">
-            <option value="lowp">Low</option>
-            <option value="medp" selected>Medium</option>
+            <option value="lowp" selected>Low</option>
+            <option value="medp">Medium</option>
             <!-- Example default -->
             <option value="highp">High</option>
           </select>
@@ -116,7 +116,7 @@
           <label for="task-project-select">Project:</label>
           <select id="task-project-select" name="taskProject">
             <!-- Project options will be populated by JS -->
-            <option value="Default">Default</option>
+            <option value="Default" selected>Default</option>
           </select>
         </div>
         <!-- Hidden input for task ID during edits - JS will manage this -->
@@ -137,6 +137,15 @@
             style="display: none"
           >
             Delete Task
+          </button>
+          <!-- Update button specifically for edit mode - JS can show/hide -->
+          <button
+            type="button"
+            class="button-primary"
+            id="task-update-btn"
+            style="display: none"
+          >
+            Update Task
           </button>
         </div>
       </form>

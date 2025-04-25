@@ -1,16 +1,13 @@
 import "./styles/style.css";
-// import "./styles/modal.css";
-// import "./styles/variables.css";
-// import "./styles/reset.css";
-// import initializeCreateTaskModal from "./handlers/tasks/newTaskFormHandler.js";
-// import initializeCreateTaskProject from "./handlers/projects/newProjectForm.js";
-// initializeCreateTaskModal();
-// initializeCreateTaskProject();
 import addTaskMenu from "./handlers/tasks/addTaskMenu.js";
 import renderTasks from "./handlers/tasks/renderTasks.js";
 import { getAllTasks } from "./handlers/tasks/taskStorage.js";
+import setupModalListeners from "./handlers/tasks/editTask.js";
+
 addTaskMenu();
+setupModalListeners();
+
 let allTask = getAllTasks();
-console.log(allTask);
 renderTasks(allTask);
+
 console.log("Application started.");

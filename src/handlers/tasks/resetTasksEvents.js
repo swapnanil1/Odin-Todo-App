@@ -1,40 +1,33 @@
-import editTaskMenu from "./editTaskMenu";
-import {
-  saveTaskToLocalStorage,
-  getTaskFromLocalStorage,
-  getAllTasks,
-  getTask,
-} from "./taskStorage";
+import { populateEditForm } from "./editTask.js";
+
+const handleClickTask = (event) => {
+  const taskModal = document.getElementById("task-modal");
+  const TaskModalTitle = document.getElementById("task-modal-title");
+  const showDeleteBtn = document.getElementById("task-delete-btn");
+  const hideSubmitBtn = document.getElementById("task-submit-btn");
+  const showUpdateBtn = document.getElementById("task-update-btn");
+
+  const domTask = event.currentTarget;
+  const uuid = domTask.dataset.uuid;
+
+  console.log(`Task clicked (UUID: ${uuid}):`, domTask);
+
+  taskModal.showModal();
+  TaskModalTitle.textContent = "Edit Selected Task";
+  hideSubmitBtn.style.display = "none";
+  showUpdateBtn.style.display = "inline-block";
+  showDeleteBtn.style.display = "inline-block";
+
+  populateEditForm(uuid);
+};
 
 export default function resetTasksEvents() {
-  const taskModal = document.getElementById("task-modal");
   const domTaskList = document.querySelectorAll("main section ul li");
 
-  const handleClickTask = (event) => {
-    const domTask = event.currentTarget; // Get the clicked DOM element
-    const uuid = domTask.dataset.uuid; // only identifier make sure it is present
-    taskModal.showModal();
-    editTaskMenu(uuid);
-    console.log(`Task clicked: ${event.target}`);
-  };
-
-  // First, remove existing click listeners
   domTaskList.forEach((domTask) => {
     domTask.removeEventListener("click", handleClickTask);
-  });
-
-  // Then, add the click listener for each task
-  domTaskList.forEach((domTask) => {
     domTask.addEventListener("click", handleClickTask);
   });
 
-  const showDeleteBtn = document.getElementById("task-delete-btn");
-
-  // Make the delete button show when any task is clicked
-  domTaskList.forEach((DOMs_li) => {
-    DOMs_li.addEventListener("click", () => {
-      console.log(DOMs_li); // Find the task's uuid and match it with the database's uuid
-      showDeleteBtn.style.display = "inline-block";
-    });
-  });
+  console.log(`Reset event listeners for ${domTaskList.length} tasks.`);
 }
