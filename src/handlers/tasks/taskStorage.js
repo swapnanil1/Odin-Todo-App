@@ -1,3 +1,17 @@
+//Seriously, for building a successfull app that has a lot of user dataStorage/interaction you need to have a proper database.
+// That you as a dev can call into to update/add/delete data from anywhere inside the code
+// no mater how buried it may be inside multiple if-else functions or eventListers it might be
+// just import the database and perform edits!
+
+// at first i tried to setup using arrays to store return and access data. annnd it always broke on me,
+// causing multiple data corruption like creating two task when i add one, setting all tasks to same name etc
+// Nightmare! Everything disappears on refresh, and passing data gets messy fast.
+// This module using localStorage is the fix. It gives us a central, persistent place
+// for all task data.
+
+// Basically, it's our mini "database" for tasks. Keeps the rest of the code cleaner
+// and focused on the UI, instead of worrying about where the data lives. A huge relief!
+
 const STORAGE_KEY = "tasks";
 
 export function getAllTasks() {

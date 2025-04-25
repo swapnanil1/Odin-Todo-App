@@ -1,3 +1,8 @@
+// this renderTask is meant to run multiple times
+// first it clears the html then it takes all the tasks from db
+// then renders them according to there priority.
+// after rendering tasks we run resetTasksEvents that adds events for editing said task
+
 import createPlantSVG from "../../components/plantComponent.js";
 import createSandCastleSVG from "../../components/sandCastleComponent.js";
 import createCloudSVG from "../../components/cloudComponent.js";

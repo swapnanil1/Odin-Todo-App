@@ -1,3 +1,4 @@
+// create Tasks is responible for saving the entered data to the localstorage just that
 import { saveTask } from "./taskStorage.js";
 
 const initialTaskName = document.getElementById("task-name-input");

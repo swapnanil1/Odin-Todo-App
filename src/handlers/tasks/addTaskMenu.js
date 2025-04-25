@@ -1,3 +1,9 @@
+// Basically the entry point of the app "add a task"
+// it really does what it says
+// when add task btn is clicked it brings up the modal, styles it to make is a createTaskModal
+// and on submiting the form inside the modal calls createTask which grabs the entered data form the opened inputModal , creates a taskobject of it , pass tasskObject to localStorage for storing it.
+// after that the modal closes. and renders all tasks inside the DB
+
 import createTask from "./createTask.js";
 import { getAllTasks } from "./taskStorage.js";
 import renderTasks from "./renderTasks.js";
