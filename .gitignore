@@ -136,4 +136,6 @@ dist
 .pnp.*
 
 # IDE Settings
-.idea
+.idea/
+qodana.yaml
+.vscode/

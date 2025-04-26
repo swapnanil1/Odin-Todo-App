@@ -14,6 +14,15 @@ export function saveAllProjects(projectsArray) {
 
 export function saveProject(projectObject) {
     const currentProjects = getAllProjects();
+
+    const duplicate = currentProjects.find(
+        (projectInDB) => projectInDB.projectName === projectObject.projectName
+    );
+    if (duplicate) {
+        alert("This project already exists");
+        return;
+    }
+
     const projectIndex = currentProjects.findIndex(
         (projectInDB) => projectInDB.projectID === projectObject.projectID
     );
@@ -26,6 +35,7 @@ export function saveProject(projectObject) {
 
     saveAllProjects(currentProjects);
 }
+
 
 export function deleteProject(uuid) {
     let currentProjects = getAllProjects();

@@ -1,183 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <!-- Link your CSS file -->
     <title>ToDo App - Refreshed</title>
-  </head>
-  <body>
-    <div class="app-container">
-      <!-- Sidebar for Navigation, Projects, and Actions -->
-      <aside class="app-sidebar">
+</head>
+<body>
+<div class="app-container">
+    <!-- Sidebar for Navigation, Projects, and Actions -->
+    <aside class="app-sidebar">
         <!-- Section for main navigation/views (Optional but good structure) -->
         <section class="sidebar-section sidebar-navigation">
-          <h2>View Tasks</h2>
-          <nav>
-            <ul>
-              <!-- Example View Links - JS would handle clicks -->
-              <li>
-                <button type="button" class="nav-button" data-view="all">
-                  All Tasks
-                </button>
-              </li>
-              <li>
-                <button type="button" class="nav-button" data-view="upcoming">
-                  Upcoming
-                </button>
-              </li>
-              <!-- Add more views if needed -->
-            </ul>
-          </nav>
+            <h2>View Tasks</h2>
+            <nav>
+                <ul>
+                    <!-- Example View Links - JS would handle clicks -->
+                    <li>
+                        <button class="nav-button" data-view="all" type="button">
+                            All Tasks
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button" data-view="upcoming" type="button">
+                            Upcoming
+                        </button>
+                    </li>
+                    <!-- Add more views if needed -->
+                </ul>
+            </nav>
         </section>
 
         <!-- Section for Projects -->
         <section class="sidebar-section sidebar-projects">
-          <header class="section-header">
-            <h2>Projects</h2>
-            <button type="button" id="add-project-btn" title="Add New Project">
-              +
-            </button>
-          </header>
-          <ul id="project-list">
-            <!-- Project list items (like <li>Default</li>, <li>Work</li>) will be added here by JS -->
-          </ul>
+            <header class="section-header">
+                <h2>Projects</h2>
+                <button id="add-project-btn" title="Add New Project" type="button">
+                    +
+                </button>
+            </header>
+            <ul id="static-project-list">
+                <li>Default</li>
+            </ul>
+            <ul id=project-list></ul>
+
         </section>
 
         <!-- Section for Actions -->
         <section class="sidebar-section sidebar-actions">
-          <h2>Actions</h2>
-          <button type="button" id="add-task-btn" class="button-primary">
-            Add New Task
-          </button>
+            <h2>Actions</h2>
+            <button class="button-primary" id="add-task-btn" type="button">
+                Add New Task
+            </button>
         </section>
-      </aside>
+    </aside>
 
-      <!-- Main Content Area for Displaying Tasks -->
-      <main class="app-content">
+    <!-- Main Content Area for Displaying Tasks -->
+    <main class="app-content">
         <h1>Tasks</h1>
         <!-- Sections for each priority -->
-        <section id="priority-high" class="task-priority-section">
-          <h2>High Priority</h2>
-          <ul id="high-priority-tasks" class="task-list">
-            <!-- High priority task items will be added here by JS -->
-          </ul>
+        <section class="task-priority-section" id="priority-high">
+            <h2>High Priority</h2>
+            <ul class="task-list" id="high-priority-tasks">
+                <!-- High priority task items will be added here by JS -->
+            </ul>
         </section>
 
-        <section id="priority-medium" class="task-priority-section">
-          <h2>Medium Priority</h2>
-          <ul id="medium-priority-tasks" class="task-list">
-            <!-- Medium priority task items will be added here by JS -->
-          </ul>
+        <section class="task-priority-section" id="priority-medium">
+            <h2>Medium Priority</h2>
+            <ul class="task-list" id="medium-priority-tasks">
+                <!-- Medium priority task items will be added here by JS -->
+            </ul>
         </section>
 
-        <section id="priority-low" class="task-priority-section">
-          <h2>Low Priority</h2>
-          <ul id="low-priority-tasks" class="task-list">
-            <!-- Low priority task items will be added here by JS -->
-          </ul>
+        <section class="task-priority-section" id="priority-low">
+            <h2>Low Priority</h2>
+            <ul class="task-list" id="low-priority-tasks">
+                <!-- Low priority task items will be added here by JS -->
+            </ul>
         </section>
-      </main>
-    </div>
+    </main>
+</div>
 
-    <!-- Modals (can be placed outside the main container for stacking context) -->
+<!-- Modals (can be placed outside the main container for stacking context) -->
 
-    <!-- Add/Edit Task Modal -->
-    <dialog id="task-modal" class="modal">
-      <form id="task-form" method="dialog">
+<!-- Add/Edit Task Modal -->
+<dialog class="modal" id="task-modal">
+    <form id="task-form" method="dialog">
         <h2 id="task-modal-title">Add New Task</h2>
         <!-- Use unique IDs even for edit modal fields if reusing structure, JS will populate -->
         <div class="form-group">
-          <label for="task-name-input">Task Name:</label>
-          <input type="text" id="task-name-input" name="taskName" required />
+            <label for="task-name-input">Task Name:</label>
+            <input id="task-name-input" name="taskName" required type="text"/>
         </div>
         <div class="form-group">
-          <label for="task-desc-input">Description:</label>
-          <textarea
-            id="task-desc-input"
-            name="taskDescription"
-            rows="3"
-          ></textarea>
+            <label for="task-desc-input">Description:</label>
+            <textarea
+                    id="task-desc-input"
+                    name="taskDescription"
+                    rows="3"
+            ></textarea>
         </div>
         <div class="form-group">
-          <label for="task-due-input">Due Date:</label>
-          <input type="date" id="task-due-input" name="taskDueDate" />
+            <label for="task-due-input">Due Date:</label>
+            <input id="task-due-input" name="taskDueDate" type="date"/>
         </div>
         <div class="form-group">
-          <label for="task-priority-select">Priority:</label>
-          <select id="task-priority-select" name="taskPriority">
-            <option value="lowp" selected>Low</option>
-            <option value="medp">Medium</option>
-            <!-- Example default -->
-            <option value="highp">High</option>
-          </select>
+            <label for="task-priority-select">Priority:</label>
+            <select id="task-priority-select" name="taskPriority">
+                <option selected value="lowp">Low</option>
+                <option value="medp">Medium</option>
+                <!-- Example default -->
+                <option value="highp">High</option>
+            </select>
         </div>
         <div class="form-group">
-          <label for="task-project-select">Project:</label>
-          <select id="task-project-select" name="taskProject">
-            <!-- Project options will be populated by JS -->
-            <option value="Default" selected>Default</option>
-          </select>
+            <label for="task-project-select">Project:</label>
+            <select id="task-project-select" name="taskProject">
+                <!-- Project options will be populated by JS -->
+                <option selected value="Default">Default</option>
+            </select>
         </div>
         <!-- Hidden input for task ID during edits - JS will manage this -->
-        <input type="hidden" id="task-id-input" name="taskId" />
+        <input id="task-id-input" name="taskId" type="hidden"/>
 
         <div class="modal-controls">
-          <button type="button" class="button-secondary" id="task-cancel-btn">
-            Cancel
-          </button>
-          <button type="submit" class="button-primary" id="task-submit-btn">
-            Save Task
-          </button>
-          <!-- Delete button specifically for edit mode - JS can show/hide -->
-          <button
-            type="button"
-            class="button-danger"
-            id="task-delete-btn"
-            style="display: none"
-          >
-            Delete Task
-          </button>
-          <!-- Update button specifically for edit mode - JS can show/hide -->
-          <button
-            type="button"
-            class="button-primary"
-            id="task-update-btn"
-            style="display: none"
-          >
-            Update Task
-          </button>
+            <button class="button-secondary" id="task-cancel-btn" type="button">
+                Cancel
+            </button>
+            <button class="button-primary" id="task-submit-btn" type="submit">
+                Save Task
+            </button>
+            <!-- Delete button specifically for edit mode - JS can show/hide -->
+            <button
+                    class="button-danger"
+                    id="task-delete-btn"
+                    style="display: none"
+                    type="button"
+            >
+                Delete Task
+            </button>
+            <!-- Update button specifically for edit mode - JS can show/hide -->
+            <button
+                    class="button-primary"
+                    id="task-update-btn"
+                    style="display: none"
+                    type="button"
+            >
+                Update Task
+            </button>
         </div>
-      </form>
-    </dialog>
+    </form>
+</dialog>
 
-    <!-- Add Project Modal -->
-    <dialog id="add-project-modal" class="modal">
-      <form id="add-project-form" method="dialog">
-        <h2>Add New Project</h2>
+<!-- Add Project Modal -->
+<dialog class="modal" id="project-modal">
+    <form id="project-form" method="dialog">
+        <h2 id="project-modal-heading">Add New Project</h2>
         <div class="form-group">
-          <label for="project-name-input">Project Name:</label>
-          <input
-            type="text"
-            id="project-name-input"
-            name="projectName"
-            required
-          />
+            <label for="project-name-input">Project Name:</label>
+            <input
+                    id="project-name-input"
+                    name="projectName"
+                    required
+                    type="text"
+            />
         </div>
         <div class="modal-controls">
-          <button
-            type="button"
-            class="button-secondary"
-            id="add-project-cancel-btn"
-          >
-            Cancel
-          </button>
-          <button type="submit" class="button-primary">Add Project</button>
+            <button
+                    class="button-tertiary"
+                    id="update-project-btn"
+                    style="display: none"
+                    type="button"
+            >
+                Update Project
+            </button>
+            <button
+                    class="button-secondary"
+                    id="add-project-cancel-btn"
+                    type="button"
+            >
+                Cancel
+            </button>
+            <button class="button-primary" id="project-save-btn" type="submit">Add Project</button>
         </div>
-      </form>
-    </dialog>
+    </form>
+</dialog>
 
-    <!-- Link your JavaScript file -->
-    <script type="module" src="main.js"></script>
-  </body>
+<!-- Link your JavaScript file -->
+<script src="main.js" type="module"></script>
+</body>
 </html>
