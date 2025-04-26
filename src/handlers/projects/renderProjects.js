@@ -1,15 +1,20 @@
-import {getAllProjects} from "./localProjectStore";
+// renderProjects.js
+import { getAllProjects } from "./localProjectStore.js";
+import handleProjectEvents from "./handleProjectEvents.js";
 
 export function renderAllProjects() {
-    const projectListContainer = document.querySelector('ul#project-list');
-    projectListContainer.innerHTML = '';
-    const getLocalProjects = getAllProjects();
-    getLocalProjects.forEach((project) => {
-        const aProject = document.createElement('li');
-        aProject.dataset.projectname = project.projectName;
-        aProject.dataset.id = project.projectID;
-        aProject.classList.add('project');
-        aProject.innerText = project.projectName;
-        projectListContainer.appendChild(aProject);
-    })
+  const projectListContainer = document.querySelector("ul#project-list");
+
+  projectListContainer.innerHTML = "";
+  const getLocalProjects = getAllProjects();
+
+  getLocalProjects.forEach((project) => {
+    const aProject = document.createElement("li");
+    aProject.dataset.projectname = project.projectName;
+    aProject.dataset.id = project.projectID;
+    aProject.classList.add("project");
+    aProject.innerText = project.projectName;
+    projectListContainer.appendChild(aProject);
+  });
+  handleProjectEvents();
 }
