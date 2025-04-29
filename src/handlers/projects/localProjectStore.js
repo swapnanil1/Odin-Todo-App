@@ -7,6 +7,11 @@ export function getAllProjects() {
   return Array.isArray(projects) ? projects : [];
 }
 
+export function getAllProjectNames() {
+  const projects = getAllProjects();
+  return projects.map((project) => project.projectName);
+}
+
 export function saveAllProjects(projectsArray) {
   const projectsJSON = JSON.stringify(projectsArray);
   localStorage.setItem(STORAGE_KEY, projectsJSON);

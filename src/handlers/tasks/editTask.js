@@ -14,6 +14,7 @@
 
 import renderTasks from "./renderTasks.js";
 import { getAllTasks, saveTask, deleteTask, getTask } from "./taskStorage.js";
+import { getAllProjectNames } from "../projects/localProjectStore.js";
 
 export function populateEditForm(uuid) {
   const TaskModalForm = document.getElementById("task-form");
@@ -26,11 +27,19 @@ export function populateEditForm(uuid) {
   const task = getTask(uuid);
 
   if (task) {
+    TaskProjectSelect.innerHTML = "";
     TaskModalForm.dataset.editingUuid = uuid;
     TaskNameInput.value = task.title;
     TaskDescInput.value = task.description;
     TaskDueInput.value = task.dueDate;
     TaskPrioritySelect.value = task.priority;
+    const projectNames = getAllProjectNames();
+    projectNames.forEach((project) => {
+      const option = document.createElement("option");
+      option.value = project;
+      option.textContent = project;
+      TaskProjectSelect.appendChild(option);
+    });
     TaskProjectSelect.value = task.project;
   } else {
     console.log(`Task with UUID ${uuid} not found for editing.`);

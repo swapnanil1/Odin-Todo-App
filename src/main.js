@@ -5,15 +5,21 @@ import { getAllTasks } from "./handlers/tasks/taskStorage.js";
 import setupModalListeners from "./handlers/tasks/editTask.js";
 import addProjectMenu from "./handlers/projects/addProjectMenu";
 import { renderAllProjects } from "./handlers/projects/renderProjects";
-import handleProjectEvents from "./handlers/projects/handleProjectEvents";
+import { handleProjectEditMenu } from "./handlers/projects/handleProjectEvents";
 import setupMobileMenu from "./handlers/setupMobileMenuToggle.js";
 addTaskMenu();
 setupModalListeners();
 addProjectMenu();
 renderAllProjects();
-handleProjectEvents();
+handleProjectEditMenu();
 setupMobileMenu();
 let allTask = getAllTasks();
 renderTasks(allTask);
-
+// view all tasks
+const viewAllTasks = document.getElementById("view-all-tasks-btn");
+viewAllTasks.addEventListener("click", () => {
+  const appHeadTitle = document.getElementById("main-content-title");
+  appHeadTitle.innerText = "All Tasks";
+  renderTasks(allTask);
+});
 console.log("Application started.");

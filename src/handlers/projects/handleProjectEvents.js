@@ -1,5 +1,7 @@
-//
-const handleProjectClick = (e) => {
+import { getAllTaskByProject } from "../tasks/taskStorage";
+import renderTasks from "../tasks/renderTasks";
+const handleProjectMenuClick = (e) => {
+  e.stopPropagation();
   const clickedProject = e.currentTarget;
   const projectNameFromData = clickedProject.dataset.projectname;
   const projectIDFromData = clickedProject.dataset.id;
@@ -27,11 +29,27 @@ const handleProjectClick = (e) => {
   editProjectModal.showModal();
 };
 
-export default function handleProjectEvents() {
-  const allProjectsDOMList = document.querySelectorAll(".project span");
+const viewTasksByProjectClick = (e) => {
+  const clickedProject = e.currentTarget;
+  const projectName = clickedProject.firstChild.textContent.trim();
+  const appHeadTitle = document.getElementById("main-content-title");
+  appHeadTitle.innerText = `Project: ${projectName}`;
+  const allTasksByProject = getAllTaskByProject(projectName);
+  renderTasks(allTasksByProject);
+};
 
-  allProjectsDOMList.forEach((projectElement) => {
-    projectElement.removeEventListener("click", handleProjectClick);
-    projectElement.addEventListener("click", handleProjectClick);
+export function handleProjectEditMenu() {
+  const allProjectsEditList = document.querySelectorAll(".project span");
+
+  allProjectsEditList.forEach((projectsEditMenu) => {
+    projectsEditMenu.removeEventListener("click", handleProjectMenuClick);
+    projectsEditMenu.addEventListener("click", handleProjectMenuClick);
+  });
+}
+export function viewTasksByProject() {
+  const allProjectList = document.querySelectorAll(".project");
+  allProjectList.forEach((projectList) => {
+    projectList.removeEventListener("click", viewTasksByProjectClick);
+    projectList.addEventListener("click", viewTasksByProjectClick);
   });
 }

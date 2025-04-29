@@ -21,6 +21,11 @@ export function getAllTasks() {
   return Array.isArray(tasks) ? tasks : [];
 }
 
+export function getAllTaskByProject(projectName) {
+  const tasks = getAllTasks();
+  return tasks.filter((task) => task.project && task.project === projectName);
+}
+
 export function saveAllTasks(tasksArray) {
   const tasksJSON = JSON.stringify(tasksArray);
   localStorage.setItem(STORAGE_KEY, tasksJSON);

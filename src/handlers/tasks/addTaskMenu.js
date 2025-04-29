@@ -5,9 +5,9 @@
 // after that the modal closes. and renders all tasks inside the DB
 
 import createTask from "./createTask.js";
-import { getAllTasks, deleteAllTasks } from "./taskStorage.js";
+import { getAllTasks, deleteAllTasks, getAllTaskNames } from "./taskStorage.js";
+import { getAllProjectNames } from "../projects/localProjectStore.js";
 import renderTasks from "./renderTasks.js";
-
 export default function addTaskMenu() {
   const TaskModal = document.getElementById("task-modal");
   const addTaskBtn = document.getElementById("add-task-btn");
@@ -22,18 +22,28 @@ export default function addTaskMenu() {
   const TaskModalTitle = document.getElementById("task-modal-title");
   const showDeleteBtn = document.getElementById("task-delete-btn");
   const deleteAllTasksBtn = document.getElementById("delete-all-task-btn");
+
   addTaskBtn.addEventListener("click", () => {
     console.log("Adding Task");
-    TaskModal.showModal();
     TaskModalTitle.textContent = "Create New Task";
     TaskNameInput.value = "";
     TaskDescInput.value = "";
     TaskDueInput.value = "";
     TaskPrioritySelect.value = "lowp";
-    TaskProjectSelect.value = "Default";
     hideSubmitBtn.style.display = "inline-block";
     showUpdateBtn.style.display = "none";
     showDeleteBtn.style.display = "none";
+
+    TaskProjectSelect.innerHTML = "";
+
+    const projectNames = getAllProjectNames();
+    projectNames.forEach((project) => {
+      const option = document.createElement("option");
+      option.value = project;
+      option.textContent = project;
+      TaskProjectSelect.appendChild(option);
+    });
+    TaskModal.showModal();
   });
 
   const closeTaskModalBtn = document.getElementById("task-cancel-btn");

@@ -30,6 +30,7 @@
                     class="nav-button active"
                     data-view="all"
                     type="button"
+                    id="view-all-tasks-btn"
                   >
                     <i class="fas fa-tasks"></i> All Tasks
                   </button>
@@ -65,12 +66,11 @@
                 </button>
               </div>
             </header>
-            <ul id="static-project-list">
-              <li class="project-item active" data-project-name="Default">
-                Default
-              </li>
+            <!-- Removed static project list -->
+            <ul id="project-list">
+              <!-- Dynamic projects added by JS will go here -->
+              <!-- Example JS output: <li class="project active" data-project-name="Work">Work<span ...><button class="edit-project-btn ...">Edit</button></span></li> -->
             </ul>
-            <ul id="project-list"></ul>
           </section>
 
           <section class="sidebar-section sidebar-actions">
@@ -143,6 +143,10 @@
       </main>
     </div>
 
+    <!-- Overlay for mobile menu click-outside-to-close -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Modals -->
     <dialog class="modal" id="task-modal">
       <form id="task-form" method="dialog">
         <button type="button" class="modal-close-btn" aria-label="Close dialog">
@@ -186,7 +190,8 @@
         <div class="form-group">
           <label for="task-project-select">Project:</label>
           <select id="task-project-select" name="taskProject">
-            <option value="Default">Default</option>
+            <!-- Default option should be added by JS if needed -->
+            <!-- <option value="Default">Default</option> -->
           </select>
         </div>
 
