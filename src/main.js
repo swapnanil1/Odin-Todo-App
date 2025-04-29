@@ -15,7 +15,6 @@ handleProjectEditMenu();
 setupMobileMenu();
 let allTask = getAllTasks();
 renderTasks(allTask);
-// view all tasks
 const viewAllTasks = document.getElementById("view-all-tasks-btn");
 viewAllTasks.addEventListener("click", () => {
   const appHeadTitle = document.getElementById("main-content-title");

@@ -43,6 +43,10 @@ button:focus-visible {
   background-color: #a80115;
   transform: translateY(-2px);
 }
+.button-complete {
+  background-color: var(--tertiary-color);
+  color: var(--dark-color);
+}
 .button-icon {
   padding: 0.5em;
   font-size: 1rem;
