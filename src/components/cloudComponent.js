@@ -1,128 +1,91 @@
-// cloudComponent.js
+var cloudSvgV1 =
+  '<svg width="120" height="75" viewBox="0 0 120 75" xmlns="http://www.w3.org/2000/svg" id="taskCloudIcon">' +
+  "<title>{{TASK_NAME}}</title>" +
+  "<desc>{{TASK_DESC}}</desc>" +
+  "<defs>" +
+  '<linearGradient id="gradCloud_{{UNIQUE_ID}}" x1="0%" y1="0%" x2="0%" y2="100%">' +
+  '<stop offset="0%" style="stop-color:{{GRADIENT_START}};stop-opacity:1" />' +
+  '<stop offset="100%" style="stop-color:{{GRADIENT_END}};stop-opacity:0.9" />' +
+  "</linearGradient>" +
+  '<filter id="softBlur_{{UNIQUE_ID}}" x="-20%" y="-20%" width="140%" height="140%">' +
+  '<feGaussianBlur stdDeviation="1"/>' +
+  "</filter>" +
+  "</defs>" +
+  '<g filter="url(#softBlur_{{UNIQUE_ID}})">' +
+  '<path d="M 30 65 C 10 65, 5 45, 30 40 C 25 20, 50 15, 65 30 C 80 18, 105 25, 110 45 C 130 45, 125 65, 95 65 Z" fill="url(#gradCloud_{{UNIQUE_ID}})" />' +
+  "</g>" +
+  '<text x="60" y="53" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="{{TEXT_COLOR}}" text-anchor="middle" dominant-baseline="middle">{{TASK_NAME_SHORT}}</text>' +
+  "</svg>";
 
-const cloudSvgV1 = `
-<svg width="100" height="60" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
-  <title>Gentle Puff Cloud</title>
-  <desc>A medium-sized, soft cumulus cloud.</desc>
-  <path id="cloud1Path" d="M 20 60 C 5 60, 5 40, 30 40 C 30 20, 60 20, 70 35 C 85 25, 110 35, 110 50 C 125 50, 125 60, 100 60 Z" fill="CLOUD_FILL_URL_OR_COLOR" />
-  <text x="70" y="48" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="TEXT_FILL_COLOR" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
+var cloudSvgV2 =
+  '<svg width="130" height="70" viewBox="0 0 130 70" xmlns="http://www.w3.org/2000/svg" id="taskCloudIcon">' +
+  "<title>{{TASK_NAME}}</title>" +
+  "<desc>{{TASK_DESC}}</desc>" +
+  "<defs>" +
+  '<radialGradient id="gradCloud_{{UNIQUE_ID}}" cx="50%" cy="40%" r="70%" fx="50%" fy="30%">' +
+  '<stop offset="0%" style="stop-color:{{GRADIENT_START}};stop-opacity:1" />' +
+  '<stop offset="100%" style="stop-color:{{GRADIENT_END}};stop-opacity:0.85" />' +
+  "</radialGradient>" +
+  "</defs>" +
+  '<path d="M 25 60 C 5 60, 5 40, 35 40 C 30 20, 55 10, 70 25 C 90 15, 115 25, 115 45 C 135 45, 130 60, 105 60 Z" fill="url(#gradCloud_{{UNIQUE_ID}})" />' +
+  '<text x="65" y="48" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="{{TEXT_COLOR}}" text-anchor="middle" dominant-baseline="middle">{{TASK_NAME_SHORT}}</text>' +
+  "</svg>";
 
-const cloudSvgV2_new = `
-<svg width="100" height="65" viewBox="0 0 130 75" xmlns="http://www.w3.org/2000/svg">
-    <title>Floating Cloud</title>
-    <desc>A medium cloud with distinct round sections.</desc>
-    <path id="cloud2Path" d="M 25 65 C 5 65, 5 45, 30 45 C 20 25, 40 15, 60 25 C 80 15, 105 25, 105 45 C 125 45, 125 65, 100 65 Z" fill="CLOUD_FILL_URL_OR_COLOR"/>
-    <text x="65" y="50" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="TEXT_FILL_COLOR" text-anchor="middle">
-      TASK_NAME_PLACEHOLDER
-    </text>
-</svg>
-`;
+var cloudSvgV3 =
+  '<svg width="140" height="80" viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" id="taskCloudIcon">' +
+  "<title>{{TASK_NAME}}</title>" +
+  "<desc>{{TASK_DESC}}</desc>" +
+  "<defs>" +
+  '<linearGradient id="gradCloud_{{UNIQUE_ID}}" x1="0%" y1="0%" x2="0%" y2="100%">' +
+  '<stop offset="0%" style="stop-color:{{GRADIENT_START}};stop-opacity:0.9" />' +
+  '<stop offset="100%" style="stop-color:{{GRADIENT_END}};stop-opacity:1" />' +
+  "</linearGradient>" +
+  '<filter id="cloudLayerFilter_{{UNIQUE_ID}}">' +
+  '<feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>' +
+  '<feOffset dy="2" result="offsetBlur"/>' +
+  "<feMerge>" +
+  '<feMergeNode in="offsetBlur"/>' +
+  '<feMergeNode in="SourceGraphic"/>' +
+  "</feMerge>" +
+  "</filter>" +
+  "</defs>" +
+  '<g filter="url(#cloudLayerFilter_{{UNIQUE_ID}})">' +
+  '<path d="M 20 70 C 0 70, 0 50, 30 45 C 20 25, 45 15, 65 30 C 85 20, 110 30, 115 50 C 135 50, 140 70, 110 70 Z" fill="url(#gradCloud_{{UNIQUE_ID}})" opacity="0.85"/>' +
+  '<path d="M 40 65 C 25 65, 20 50, 40 45 C 35 30, 55 25, 70 35 C 85 28, 105 35, 105 50 C 120 50, 125 65, 100 65 Z" fill="url(#gradCloud_{{UNIQUE_ID}})" opacity="0.95" transform="translate(5, -5)"/>' +
+  "</g>" +
+  '<text x="70" y="55" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="{{TEXT_COLOR}}" text-anchor="middle" dominant-baseline="middle">{{TASK_NAME_SHORT}}</text>' +
+  "</svg>";
 
-const cloudSvgV3 = `
-<svg width="100" height="70" viewBox="0 0 130 80" xmlns="http://www.w3.org/2000/svg">
-  <title>Soft Cloud Cluster</title>
-  <desc>A cluster of small, soft cloud puffs.</desc>
-  <defs>
-    <path id="puff1_v3" d="M 30 70 C 10 70, 10 50, 35 50 C 35 35, 55 35, 60 45 C 70 40, 85 45, 85 55 C 95 55, 95 70, 75 70 Z"/>
-    <path id="puff2_v3" d="M 75 65 C 65 65, 65 50, 80 50 C 80 40, 95 40, 100 45 C 110 42, 120 45, 120 55 C 130 55, 130 65, 110 65 Z"/>
-    <path id="puff3_v3" d="M 50 55 C 40 55, 40 40, 55 40 C 55 30, 70 30, 75 35 C 85 32, 95 35, 95 45 C 105 45, 105 55, 85 55 Z"/>
-  </defs>
-  <use href="#puff1_v3" fill="CLOUD_FILL_URL_OR_COLOR"/>
-  <use href="#puff2_v3" fill="CLOUD_FILL_URL_OR_COLOR" transform="translate(-10, -5)"/>
-  <use href="#puff3_v3" fill="CLOUD_FILL_URL_OR_COLOR" transform="translate(-20, -15)"/>
-  <text x="65" y="53" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="TEXT_FILL_COLOR" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
+var cloudShapeSvgs = [cloudSvgV1, cloudSvgV2, cloudSvgV3];
 
-const cloudSvgV4_new = `
-<svg width="100" height="60" viewBox="0 0 160 75" xmlns="http://www.w3.org/2000/svg">
-  <title>Layered Drifting Cloud</title>
-  <desc>A horizontally oriented cloud with overlapping layers.</desc>
-  <g opacity="0.85">
-     <path id="cloud4Layer1" d="M 10 65 C 40 75, 120 75, 150 65 C 140 55, 110 50, 80 55 C 50 50, 20 55, 10 65 Z" fill="CLOUD_FILL_URL_OR_COLOR"/>
-     <path id="cloud4Layer2" d="M 25 55 C 50 45, 110 45, 135 55 C 125 60, 100 65, 80 60 C 60 65, 35 60, 25 55 Z" fill="CLOUD_FILL_URL_OR_COLOR" transform="translate(0, -5)"/>
-  </g>
-  <text x="80" y="58" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="TEXT_FILL_COLOR" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
-
-const cloudSvgV5 = `
-<svg width="100" height="80" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg">
-  <title>Bright Top Puff</title>
-  <desc>A tall, bright cumulus cloud.</desc>
-   <path id="cloud5Body" d="M 20 80 C 0 80, 0 60, 25 60 C 15 40, 30 20, 50 20 C 70 20, 85 40, 75 60 C 100 60, 100 80, 80 80 Z" fill="CLOUD_FILL_URL_OR_COLOR"/>
-  <text x="55" y="60" font-family="Arial Black, sans-serif" font-weight="bold" font-size="10" fill="TEXT_FILL_COLOR" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
-
-const cloudShapeSvgs = [
-  cloudSvgV1,
-  cloudSvgV2_new,
-  cloudSvgV3,
-  cloudSvgV4_new,
-  cloudSvgV5,
+var cloudColorThemes = [
+  { id: "skyBlue", start: "#FFFFFF", end: "#E0F2F7", textColor: "#005683" },
+  { id: "softPink", start: "#FFF0F5", end: "#FFDAE0", textColor: "#8B0047" },
+  { id: "goldenHour", start: "#FFF8DC", end: "#FFECB3", textColor: "#B8860B" },
+  { id: "stormy", start: "#D3D3D3", end: "#B0C4DE", textColor: "#2F4F4F" },
+  { id: "whitePuff", start: "#FFFFFF", end: "#F5F5F5", textColor: "#696969" },
 ];
 
-const cloudColorThemes = [
-  {
-    id: "blueSky",
-    fill: `url(#gradBlueSky)`,
-    gradientDef: `<linearGradient id="gradBlueSky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F0F4F8"/></linearGradient>`,
-    textColor: "#555555",
-  },
-  {
-    id: "sunset",
-    fill: `url(#gradSunset)`,
-    gradientDef: `<linearGradient id="gradSunset" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFDAB9"/><stop offset="50%" stop-color="#FFA07A"/><stop offset="100%" stop-color="#FFC0CB"/></linearGradient>`,
-    textColor: "#8B4513",
-  },
-  {
-    id: "coolBlue",
-    fill: `url(#gradCoolBlue)`,
-    gradientDef: `<linearGradient id="gradCoolBlue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E0FFFF"/><stop offset="100%" stop-color="#B0E0E6"/></linearGradient>`,
-    textColor: "#191970",
-  },
-  {
-    id: "pastel",
-    fill: `url(#gradPastel)`,
-    gradientDef: `<radialGradient id="gradPastel" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#E6E6FA"/><stop offset="100%" stop-color="#D8BFD8"/></radialGradient>`,
-    textColor: "#4B0082",
-  },
-  {
-    id: "lightYellow",
-    fill: "#FFFFE0",
-    gradientDef: "",
-    textColor: "#B8860B",
-  },
-];
+function generateUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2, 5);
+}
 
 function escapeXml(unsafe) {
   if (typeof unsafe !== "string") {
     return unsafe;
   }
-  // *** Corrected escapeXml function ***
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
       case "<":
-        return "<";
+        return "&lt;";
       case ">":
-        return ">";
+        return "&gt;";
       case "&":
-        return "&";
+        return "&amp;";
       case "'":
-        return "'";
+        return "&apos;";
       case '"':
-        return '"';
+        return "&quot;";
       default:
         return c;
     }
@@ -135,52 +98,32 @@ function getRandomElement(arr) {
 }
 
 function getRandomCloudSvg(name, descript) {
-  const cloudShapeTemplate = getRandomElement(cloudShapeSvgs);
-  const colorTheme = getRandomElement(cloudColorThemes);
+  var cloudShapeTemplate = getRandomElement(cloudShapeSvgs);
+  var colorTheme = getRandomElement(cloudColorThemes);
 
   if (!cloudShapeTemplate || !colorTheme) {
     console.error("Could not select cloud template or theme.");
     return "";
   }
 
-  let svgMarkup = cloudShapeTemplate;
-  const nameContent = escapeXml(name || "Cloud Task");
-  const descContent = escapeXml(descript || "A cloud representing a task.");
+  var uniqueId = generateUniqueId();
+  var taskName = escapeXml(name || "Cloud Task");
+  var taskNameShort =
+    taskName.length > 12 ? taskName.substring(0, 10) + "..." : taskName;
+  var taskDesc = escapeXml(descript || "A cloud representing a task.");
 
-  svgMarkup = svgMarkup.replace(
-    /(<title>)([\s\S]*?)(<\/title>)/i,
-    `$1${nameContent}$3`
-  );
-  svgMarkup = svgMarkup.replace(
-    /(<desc>)([\s\S]*?)(<\/desc>)/i,
-    `$1${descContent}$3`
-  );
+  var svgMarkup = cloudShapeTemplate;
 
-  let defsContent = "";
-  if (colorTheme.gradientDef) {
-    defsContent += colorTheme.gradientDef;
-  }
+  svgMarkup = svgMarkup
+    .replace(/\{\{UNIQUE_ID\}\}/g, uniqueId)
+    .replace(/\{\{TASK_NAME\}\}/g, taskName)
+    .replace(/\{\{TASK_NAME_SHORT\}\}/g, taskNameShort)
+    .replace(/\{\{TASK_DESC\}\}/g, taskDesc)
+    .replace(/\{\{GRADIENT_START\}\}/g, colorTheme.start)
+    .replace(/\{\{GRADIENT_END\}\}/g, colorTheme.end)
+    .replace(/\{\{TEXT_COLOR\}\}/g, colorTheme.textColor);
 
-  if (svgMarkup.includes("<defs>")) {
-    svgMarkup = svgMarkup.replace("<defs>", `<defs>${defsContent}`);
-  } else if (defsContent) {
-    svgMarkup = svgMarkup.replace(
-      /(<svg[^>]*>)/,
-      `$1<defs>${defsContent}</defs>`
-    );
-  }
-
-  svgMarkup = svgMarkup.replace(/CLOUD_FILL_URL_OR_COLOR/g, colorTheme.fill);
-  svgMarkup = svgMarkup.replace(/TEXT_FILL_COLOR/g, colorTheme.textColor);
-  svgMarkup = svgMarkup.replace(/TASK_NAME_PLACEHOLDER/g, nameContent);
-
-  // --- Modify the root <svg> tag to add the consistent ID ---
-  svgMarkup = svgMarkup.replace(
-    /(<svg[^>]*)/,
-    '$1 id="taskCloudIcon"' // Add the fixed id
-  );
-
-  return svgMarkup;
+  return svgMarkup.trim();
 }
 
-export default getRandomCloudSvg;
+module.exports = getRandomCloudSvg;

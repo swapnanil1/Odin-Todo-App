@@ -1,180 +1,132 @@
-// sandcastleComponent.js
+var sandcastleSvgV1 =
+  '<svg width="110" height="100" viewBox="0 0 110 100" xmlns="http://www.w3.org/2000/svg" id="taskSandcastleIcon">' +
+  "<title>{{TASK_NAME}}</title>" +
+  "<desc>{{TASK_DESC}}</desc>" +
+  "<defs>" +
+  '<filter id="sandTexture_{{UNIQUE_ID}}" x="-10%" y="-10%" width="120%" height="120%">' +
+  '<feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" seed="{{SEED}}" result="noise"/>' +
+  '<feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.15 0" result="noiseAlpha"/>' +
+  '<feComposite operator="in" in="noiseAlpha" in2="SourceGraphic" result="texturedNoise"/>' +
+  '<feBlend in="SourceGraphic" in2="texturedNoise" mode="multiply"/>' +
+  '<feGaussianBlur stdDeviation="0.3"/>' +
+  "</filter>" +
+  '<linearGradient id="gradSand_{{UNIQUE_ID}}" x1="0%" y1="0%" x2="0%" y2="100%">' +
+  '<stop offset="0%" stop-color="#F5EAAA"/>' +
+  '<stop offset="100%" stop-color="#E0CDA5"/>' +
+  "</linearGradient>" +
+  '<linearGradient id="gradSandDarker_{{UNIQUE_ID}}" x1="0%" y1="0%" x2="0%" y2="100%">' +
+  '<stop offset="0%" stop-color="#E0CDA5"/>' +
+  '<stop offset="100%" stop-color="#CDAD8E"/>' +
+  "</linearGradient>" +
+  '<clipPath id="clipArch_{{UNIQUE_ID}}">' +
+  '<path d="M 30 70 A 25 25 0 0 1 80 70 V 90 H 30 Z"/>' +
+  "</clipPath>" +
+  "</defs>" +
+  '<g filter="url(#sandTexture_{{UNIQUE_ID}})">' +
+  '<rect x="5" y="70" width="100" height="25" fill="url(#gradSand_{{UNIQUE_ID}})"/>' +
+  '<rect x="15" y="40" width="30" height="35" fill="url(#gradSand_{{UNIQUE_ID}})"/>' +
+  '<rect x="65" y="40" width="30" height="35" fill="url(#gradSand_{{UNIQUE_ID}})"/>' +
+  '<rect x="40" y="55" width="30" height="20" fill="url(#gradSand_{{UNIQUE_ID}})"/>' +
+  '<path d="M 30 70 A 25 25 0 0 1 80 70 V 90 H 30 Z" fill="url(#gradSandDarker_{{UNIQUE_ID}})"/>' +
+  '<rect x="30" y="70" width="50" height="20" fill="#B8860B" opacity="0.3" clip-path="url(#clipArch_{{UNIQUE_ID}})"/>' +
+  '<polygon points="15,40 20,35 25,40 30,35 35,40 40,35 45,40" fill="#D2B48C"/>' +
+  '<polygon points="65,40 70,35 75,40 80,35 85,40 90,35 95,40" fill="#D2B48C"/>' +
+  '<line x1="20" y1="35" x2="20" y2="25" stroke="#A0522D" stroke-width="1.5"/>' +
+  '<polygon points="20,25 30,28 20,31" fill="#E34234"/>' +
+  "</g>" +
+  '<text x="55" y="85" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">{{TASK_NAME_SHORT}}</text>' +
+  "</svg>";
 
-const sandcastleSvgV1 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <title>Simple Castle</title>
-  <desc>A simple sandcastle with one central tower and a flag.</desc>
-  <defs>
-    <filter id="sandTexture1" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="turbulence"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.1 0" result="textureMask"/>
-       <feComposite operator="in" in="textureMask" in2="SourceGraphic" result="textured"/>
-       <feBlend in="SourceGraphic" in2="textured" mode="multiply"/>
-    </filter>
-  </defs>
-  <g filter="url(#sandTexture1)">
-    <rect x="15" y="60" width="70" height="30" fill="#F4A460"/>
-    <rect x="35" y="30" width="30" height="35" fill="#F4A460"/>
-    <polygon points="35,30 40,25 45,30" fill="#DEB887"/>
-    <polygon points="47,30 52,25 57,30" fill="#DEB887"/>
-    <polygon points="60,30 65,25 70,30" fill="#DEB887"/>
-    <line x1="65" y1="25" x2="65" y2="15" stroke="#8B4513" stroke-width="1"/>
-    <polygon points="65,15 75,18 65,21" fill="#DC143C"/>
-  </g>
-  <text x="50" y="80" font-family="Verdana, sans-serif" font-size="9" fill="#8B4513" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
+var sandcastleSvgV2 =
+  '<svg width="100" height="110" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" id="taskSandcastleIcon">' +
+  "<title>{{TASK_NAME}}</title>" +
+  "<desc>{{TASK_DESC}}</desc>" +
+  "<defs>" +
+  '<pattern id="sandPattern_{{UNIQUE_ID}}" patternUnits="userSpaceOnUse" width="6" height="6">' +
+  '<circle cx="1" cy="1" r="0.6" fill="#D2B48C" opacity="0.4"/>' +
+  '<circle cx="4" cy="4" r="0.6" fill="#DEB887" opacity="0.4"/>' +
+  "</pattern>" +
+  '<linearGradient id="gradSandWall_{{UNIQUE_ID}}" x1="0%" y1="0%" x2="100%" y2="0%">' +
+  '<stop offset="0%" stop-color="#F5EAAA"/>' +
+  '<stop offset="50%" stop-color="#EEDDAB"/>' +
+  '<stop offset="100%" stop-color="#F5EAAA"/>' +
+  "</linearGradient>" +
+  "</defs>" +
+  '<rect x="0" y="0" width="100" height="110" fill="url(#sandPattern_{{UNIQUE_ID}})"/>' +
+  '<g stroke="#A0522D" stroke-width="1">' +
+  '<path d="M 10 95 Q 50 75 90 95 V 105 H 10 Z" fill="url(#gradSandWall_{{UNIQUE_ID}})"/>' +
+  '<path d="M 20 70 L 20 40 L 40 40 L 40 70 Z" fill="url(#gradSandWall_{{UNIQUE_ID}})"/>' +
+  '<path d="M 60 70 L 60 40 L 80 40 L 80 70 Z" fill="url(#gradSandWall_{{UNIQUE_ID}})"/>' +
+  '<rect x="35" y="55" width="30" height="15" fill="url(#gradSandWall_{{UNIQUE_ID}})"/>' +
+  '<polygon points="20,40 23,35 26,40 29,35 32,40 35,35 38,40 40,35" fill="#D2B48C"/>' +
+  '<polygon points="60,40 63,35 66,40 69,35 72,40 75,35 78,40 80,35" fill="#D2B48C"/>' +
+  '<circle cx="15" cy="90" r="4" fill="#FFDEAD"/>' +
+  '<circle cx="85" cy="90" r="4" fill="#FFDEAD"/>' +
+  '<g transform="translate(70 25) scale(0.7)">' +
+  '<polygon points="0,15 15,15 12,0 3,0" fill="#1E90FF"/>' +
+  '<path d="M 1 0 C 5 -8, 10 -8, 14 0" stroke="#696969" stroke-width="1" fill="none"/>' +
+  "</g>" +
+  "</g>" +
+  '<text x="50" y="85" font-family="Verdana, sans-serif" font-weight="bold" font-size="9" fill="#A0522D" text-anchor="middle" dominant-baseline="middle">{{TASK_NAME_SHORT}}</text>' +
+  "</svg>";
 
-const sandcastleSvgV2 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <title>Two Tower Castle</title>
-  <desc>A sandcastle with two towers connected by a wall.</desc>
-   <defs>
-     <pattern id="sandDots2" patternUnits="userSpaceOnUse" width="5" height="5">
-       <circle cx="1" cy="1" r="0.5" fill="#DEB887" opacity="0.5"/>
-       <circle cx="3" cy="4" r="0.5" fill="#D2B48C" opacity="0.5"/>
-     </pattern>
-   </defs>
-   <g fill="url(#sandDots2)">
-    <rect x="10" y="50" width="80" height="40" fill="#F5DEB3"/>
-    <rect x="15" y="25" width="25" height="35" fill="#F5DEB3"/>
-    <rect x="60" y="25" width="25" height="35" fill="#F5DEB3"/>
-    <polygon points="15,25 19,20 23,25" fill="#E0CFA8"/>
-    <polygon points="27,25 31,20 35,25" fill="#E0CFA8"/>
-    <polygon points="60,25 64,20 68,25" fill="#E0CFA8"/>
-    <polygon points="72,25 76,20 80,25" fill="#E0CFA8"/>
-   </g>
-  <text x="50" y="75" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="#A0522D" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
+var sandcastleSvgs = [sandcastleSvgV1, sandcastleSvgV2];
 
-const sandcastleSvgV3 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <title>Mound Castle</title>
-  <desc>A sandcastle built on a rounded mound with a pail.</desc>
-  <path d="M 10 90 Q 50 50, 90 90 Z" fill="#F4A460"/>
-  <circle cx="50" cy="45" r="15" fill="#FFDEAD"/>
-  <circle cx="50" cy="45" r="12" fill="#F4A460"/>
-  <rect x="45" y="25" width="10" height="10" fill="#FFDEAD"/>
-  <polygon points="45,25 47,20 49,25" fill="#DEB887"/>
-  <polygon points="51,25 53,20 55,25" fill="#DEB887"/>
-  <g transform="translate(75 75) scale(0.8)">
-    <polygon points="0,15 15,15 12,0 3,0" fill="#4682B4"/>
-    <path d="M 1 0 C 5 -8, 10 -8, 14 0" stroke="#696969" stroke-width="1" fill="none"/>
-  </g>
-  <text x="50" y="50" font-family="cursive" font-size="10" fill="#8B4513" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
-
-const sandcastleSvgV4 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <title>Castle with Arch</title>
-  <desc>A sandcastle featuring a central archway.</desc>
-  <rect x="5" y="70" width="90" height="20" fill="#DEB887"/>
-  <rect x="15" y="40" width="20" height="35" fill="#DEB887"/>
-  <rect x="65" y="40" width="20" height="35" fill="#DEB887"/>
-  <path d="M 35 75 A 15 15 0 0 1 65 75 L 65 40 L 35 40 Z" fill="#F4A460"/>
-  <path d="M 40 70 A 10 10 0 0 1 60 70 L 60 55 L 40 55 Z" fill="#A0522D"/>
-  <polygon points="15,40 18,35 21,40" fill="#D2B48C"/>
-  <polygon points="25,40 28,35 31,40" fill="#D2B48C"/>
-  <polygon points="65,40 68,35 71,40" fill="#D2B48C"/>
-  <polygon points="75,40 78,35 81,40" fill="#D2B48C"/>
-   <text x="50" y="60" font-family="Georgia, serif" font-size="9" fill="#FFF8DC" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
-
-const sandcastleSvgV5 = `
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <title>Tiered Castle</title>
-  <desc>A sandcastle with multiple tiers and simple details.</desc>
-  <rect x="10" y="75" width="80" height="15" fill="#F4A460"/>
-  <rect x="20" y="55" width="60" height="20" fill="#FFDEAD"/>
-  <rect x="35" y="30" width="30" height="25" fill="#F4A460"/>
-  <circle cx="30" cy="50" r="5" fill="#DEB887"/>
-  <circle cx="70" cy="50" r="5" fill="#DEB887"/>
-  <polygon points="35,30 40,25 45,30" fill="#DEB887"/>
-  <polygon points="55,30 60,25 65,30" fill="#DEB887"/>
-  <g>
-      <circle cx="25" cy="82" r="1.5" fill="#D2B48C" opacity="0.6"/>
-      <circle cx="50" cy="85" r="1" fill="#D2B48C" opacity="0.6"/>
-      <circle cx="75" cy="80" r="1.5" fill="#D2B48C" opacity="0.6"/>
-      <circle cx="40" cy="65" r="1" fill="#D2B48C" opacity="0.6"/>
-      <circle cx="60" cy="68" r="1" fill="#D2B48C" opacity="0.6"/>
-  </g>
-  <text x="50" y="48" font-family="Impact, sans-serif" font-size="10" fill="#A0522D" text-anchor="middle">
-    TASK_NAME_PLACEHOLDER
-  </text>
-</svg>
-`;
-
-const sandcastleSvgs = [
-  sandcastleSvgV1,
-  sandcastleSvgV2,
-  sandcastleSvgV3,
-  sandcastleSvgV4,
-  sandcastleSvgV5,
-];
+function generateUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2, 5);
+}
 
 function escapeXml(unsafe) {
   if (typeof unsafe !== "string") {
     return unsafe;
   }
-  // *** Corrected escapeXml function ***
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
       case "<":
-        return "<";
+        return "&lt;";
       case ">":
-        return ">";
+        return "&gt;";
       case "&":
-        return "&";
+        return "&amp;";
       case "'":
-        return "'";
+        return "&apos;";
       case '"':
-        return '"';
+        return "&quot;";
       default:
         return c;
     }
   });
 }
 
-function getRandomSandcastleSvg(name, descript) {
-  const randomIndex = Math.floor(Math.random() * sandcastleSvgs.length);
-  let svgMarkup = sandcastleSvgs[randomIndex];
-
-  const nameContent = escapeXml(name || "Sand Task");
-  const descContent = escapeXml(
-    descript || "A sandcastle representing a task."
-  );
-
-  // Replace title and desc first
-  svgMarkup = svgMarkup.replace(
-    /(<title>)([\s\S]*?)(<\/title>)/i,
-    `$1${nameContent}$3`
-  );
-  svgMarkup = svgMarkup.replace(
-    /(<desc>)([\s\S]*?)(<\/desc>)/i,
-    `$1${descContent}$3`
-  );
-
-  // Replace the placeholder text
-  svgMarkup = svgMarkup.replace(/TASK_NAME_PLACEHOLDER/g, nameContent);
-
-  // --- Add the consistent ID ---
-  svgMarkup = svgMarkup.replace(
-    /(<svg[^>]*)/,
-    '$1 id="taskSandcastleIcon"' // Add the fixed id
-  );
-
-  return svgMarkup;
+function getRandomElement(arr) {
+  if (!arr || arr.length === 0) return null;
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export default getRandomSandcastleSvg;
+function getRandomSandcastleSvg(name, descript) {
+  var svgTemplate = getRandomElement(sandcastleSvgs);
+  if (!svgTemplate) {
+    console.error("Could not select sandcastle template.");
+    return "";
+  }
+
+  var uniqueId = generateUniqueId();
+  var seed = Math.floor(Math.random() * 100);
+  var taskName = escapeXml(name || "Sand Task");
+  var taskNameShort =
+    taskName.length > 10 ? taskName.substring(0, 9) + "…" : taskName;
+  var taskDesc = escapeXml(descript || "A sandcastle representing a task.");
+
+  var svgMarkup = svgTemplate;
+
+  svgMarkup = svgMarkup
+    .replace(/\{\{UNIQUE_ID\}\}/g, uniqueId)
+    .replace(/\{\{SEED\}\}/g, seed)
+    .replace(/\{\{TASK_NAME\}\}/g, taskName)
+    .replace(/\{\{TASK_NAME_SHORT\}\}/g, taskNameShort)
+    .replace(/\{\{TASK_DESC\}\}/g, taskDesc);
+
+  return svgMarkup.trim();
+}
+
+module.exports = getRandomSandcastleSvg;

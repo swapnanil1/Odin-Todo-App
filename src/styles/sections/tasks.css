@@ -1,0 +1,167 @@
+.task-priority-section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+.priority-title {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--dark-color);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.environment-sky .priority-title i {
+  color: #4682b4;
+}
+.environment-beach .priority-title i {
+  color: #a0522d;
+}
+.environment-ground .priority-title i {
+  color: var(--plant-color);
+}
+.environment-sky {
+  background: var(--sky-bg);
+}
+.environment-beach {
+  background: var(--beach-bg);
+}
+.environment-ground {
+  background: var(--ground-bg);
+}
+.task-area {
+  min-height: 150px;
+}
+.task-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.task-item {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-speed) ease,
+    filter var(--transition-speed) ease;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.task-item:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(3px 6px 8px rgba(0, 0, 0, 0.3));
+}
+.task-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.task-cloud .task-svg {
+  fill: var(--cloud-color);
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.1));
+}
+.task-sandcastle .task-svg {
+  fill: var(--sandcastle-color);
+  stroke: darken(var(--sandcastle-color), 15%);
+  stroke-width: 1px;
+}
+.task-plant .task-svg {
+  fill: var(--plant-color);
+}
+
+.task-tooltip {
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--light-color);
+  padding: 0.5em 0.8em;
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease,
+    visibility var(--transition-speed) ease;
+  z-index: 10;
+  pointer-events: none;
+}
+.task-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+.task-item:hover .task-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.task-actions {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  gap: 0.3rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease,
+    visibility var(--transition-speed) ease;
+  z-index: 5;
+}
+.task-item:hover .task-actions {
+  opacity: 1;
+  visibility: visible;
+}
+.task-actions .button-icon {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.task-actions .button-icon:hover {
+  transform: scale(1.1);
+}
+.task-actions .task-edit-btn {
+  color: var(--primary-color);
+}
+.task-actions .task-edit-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+.task-actions .task-delete-btn {
+  color: var(--danger-color);
+}
+.task-actions .task-delete-btn:hover {
+  background-color: var(--danger-color);
+  color: var(--light-color);
+}
+
+.task-item.task-cloud {
+  animation: floatAnimation 8s ease-in-out infinite alternate;
+}
+.task-item.task-plant {
+  transform-origin: bottom center;
+  animation: swayAnimation 6s ease-in-out infinite alternate;
+}
