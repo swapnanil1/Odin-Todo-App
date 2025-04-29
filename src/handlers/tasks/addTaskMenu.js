@@ -5,7 +5,7 @@
 // after that the modal closes. and renders all tasks inside the DB
 
 import createTask from "./createTask.js";
-import { getAllTasks } from "./taskStorage.js";
+import { getAllTasks, deleteAllTasks } from "./taskStorage.js";
 import renderTasks from "./renderTasks.js";
 
 export default function addTaskMenu() {
@@ -21,7 +21,7 @@ export default function addTaskMenu() {
   const showUpdateBtn = document.getElementById("task-update-btn");
   const TaskModalTitle = document.getElementById("task-modal-title");
   const showDeleteBtn = document.getElementById("task-delete-btn");
-
+  const deleteAllTasksBtn = document.getElementById("delete-all-task-btn");
   addTaskBtn.addEventListener("click", () => {
     console.log("Adding Task");
     TaskModal.showModal();
@@ -49,5 +49,15 @@ export default function addTaskMenu() {
     let currentTasks = getAllTasks();
     renderTasks(currentTasks);
     console.log(currentTasks);
+  });
+
+  deleteAllTasksBtn.addEventListener("click", () => {
+    const userInput = prompt("Deleting All Tasks: Are you sure ? y/N");
+    if (userInput === "y") {
+      deleteAllTasks();
+      renderTasks(getAllTasks());
+    } else {
+      return;
+    }
   });
 }

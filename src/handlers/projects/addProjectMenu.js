@@ -1,4 +1,9 @@
-import { saveProject, getAllProjects } from "./localProjectStore.js";
+import {
+  saveProject,
+  getAllProjects,
+  deleteProject,
+  deleteAllProjects,
+} from "./localProjectStore.js";
 import { renderAllProjects } from "./renderProjects.js";
 
 export default function addProjectMenu() {
@@ -10,14 +15,19 @@ export default function addProjectMenu() {
   const projectSaveButton = document.getElementById("project-save-btn");
   const updateProjectButton = document.getElementById("update-project-btn");
   const addProjectCancelBtn = document.getElementById("add-project-cancel-btn");
-
+  const deleteProjectBtn = document.getElementById("delete-project-btn");
+  const deleteAllProjectsBtn = document.getElementById(
+    "delete-all-project-btn"
+  );
   if (addProjectBtn) {
     addProjectBtn.addEventListener("click", () => {
       projectForm.reset();
-      projectForm.removeAttribute("data-editing-project-id");
+      projectModal.removeAttribute("data-id");
       projectModalHeading.textContent = "Add New Project";
       projectSaveButton.style.display = "inline-block";
       updateProjectButton.style.display = "none";
+      deleteProjectBtn.style.display = "none";
+
       projectModal.showModal();
     });
   }
@@ -31,7 +41,7 @@ export default function addProjectMenu() {
   if (projectForm && projectModal && projectNameInput) {
     projectForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      const isEditing = projectForm.dataset.editingProjectId; // should not be there
+      const isEditing = projectModal.dataset.id; // should not be there
 
       if (!isEditing) {
         // if not editing then adding
@@ -45,6 +55,43 @@ export default function addProjectMenu() {
           renderAllProjects();
         }
         projectModal.close();
+      }
+    });
+  }
+  if (updateProjectButton) {
+    updateProjectButton.addEventListener("click", () => {
+      const keepSameID = projectModal.dataset.id;
+      const updateName = projectNameInput.value.trim();
+      deleteProject(keepSameID);
+      const newProject = {
+        projectName: updateName,
+        projectID: keepSameID,
+      };
+      saveProject(newProject);
+      renderAllProjects();
+      projectModal.close();
+    });
+  }
+  if (deleteProjectBtn) {
+    deleteProjectBtn.addEventListener("click", () => {
+      const deleteProjectID = projectModal.dataset.id;
+      if (!deleteProjectID) {
+        console.error("No project ID set in modal. Cannot delete.");
+        return;
+      }
+      deleteProject(deleteProjectID);
+      renderAllProjects();
+      projectModal.close();
+    });
+  }
+  if (deleteAllProjectsBtn) {
+    deleteAllProjectsBtn.addEventListener("click", () => {
+      const userInput = prompt("Deleting All Project: Are you sure ? y/N");
+      if (userInput === "y") {
+        deleteAllProjects();
+        renderAllProjects();
+      } else {
+        return;
       }
     });
   }
