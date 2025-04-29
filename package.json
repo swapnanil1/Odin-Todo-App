@@ -14,6 +14,6 @@
     "clean": "rm -rf dist",
     "build": "webpack",
     "dev": "webpack serve",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "deploy": "git checkout gh-pages && git merge rewrite/centralTaskStorage --no-edit && git add dist -f && git commit -m \"Deploy build output\" && git subtree push --prefix dist origin gh-pages && git checkout rewrite/centralTaskStorage"
   }
 }
