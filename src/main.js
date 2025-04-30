@@ -21,4 +21,11 @@ viewAllTasks.addEventListener("click", () => {
   appHeadTitle.innerText = "All Tasks";
   renderTasks(allTask);
 });
+const allCloseDialogBtns = document.querySelectorAll(".modal-close-btn");
+allCloseDialogBtns.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modalToClose = button.closest("dialog");
+    modalToClose.close();
+  });
+});
 console.log("Application started.");
