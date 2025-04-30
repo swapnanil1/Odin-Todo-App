@@ -8,12 +8,14 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "webpack-dev-server": "^5.2.1"
+
   },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "webpack",
     "dev": "webpack serve",
-    "deploy": "git checkout gh-pages && git merge rewrite/centralTaskStorage --no-edit && git add dist -f && git commit -m \"Deploy build output\" && git subtree push --prefix dist origin gh-pages && git checkout rewrite/centralTaskStorage"
+    "deploy": "npm run predeploy && npm run push-deploy",
+    "predeploy": "git push origin --delete gh-pages && git branch -D gh-pages || echo 'Local gh-pages branch does not exist'",
+    "push-deploy": "git checkout -b gh-pages rewrite/centralTaskStorage && git add dist -f && git commit -m \"Deploy build output\" && git subtree push --prefix dist origin gh-pages && git checkout rewrite/centralTaskStorage && git branch -D gh-pages" 
   }
 }
