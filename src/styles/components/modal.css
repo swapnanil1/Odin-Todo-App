@@ -1,3 +1,7 @@
+body.modal-open-no-scroll {
+  overflow: hidden;
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -33,7 +37,8 @@
   gap: 1rem;
   box-sizing: border-box;
   overflow-y: auto;
-  max-height: 100%;
+  max-height: calc(85vh - 4rem);
+  overscroll-behavior: contain;
 }
 
 .modal::backdrop {
