@@ -3,30 +3,35 @@ import { drawAllTasksLayout } from "./layoutManager.js";
 const upcomingTaskLayoutHTML = `
   <header class="main-content-header">
     <h1 id="main-content-title">Upcoming Tasks</h1>
-    <button id="mobile-menu-toggle" class="button-icon" aria-label="Toggle Menu">
-      <i class="fas fa-bars"></i>
-    </button>
+    <button id="mobile-menu-toggle" class="button-icon" aria-label="Toggle Menu"></button>
   </header>
-  <section class="due-in-days">
+
+  <section class="upcoming-task-section importance-high" id="due-in-days">
+    <h2 class="importance-title">
+      <i class="fas fa-exclamation-circle"></i> Due This Week
+    </h2>
     <div class="task-area">
-      <h2>due in this week</h2>
-      <ul class="upcoming-task-list" id="upcoming-due-in-days"></ul>
+      <ul class="task-list" id="up-in-days"></ul>
     </div>
   </section>
-  <section class="due-in-weeks">
+
+  <section class="upcoming-task-section importance-medium" id="due-in-weeks">
+    <h2 class="importance-title">
+      <i class="fas fa-hourglass-half"></i> Due in Upcoming Weeks
+    </h2>
     <div class="task-area">
-        <h2> due in next weeks</h2>
-        <ul class="upcoming-task-list" id="upcoming-due-in-weeks"></ul>
-    <div>
+      <ul class="task-list" id="up-in-weeks"></ul>
+    </div>
   </section>
 
-  <section class="due-in-months">
+  <section class="upcoming-task-section importance-low" id="due-in-months">
+    <h2 class="importance-title">
+      <i class="fas fa-calendar-alt"></i> Due in Upcoming Months
+    </h2>
     <div class="task-area">
-        <h2> due in next months</h2>
-        <ul class="upcoming-task-list" id="upcoming-due-in-weeks"></ul>
-    <div>
+      <ul class="task-list" id="up-in-months"></ul>
+    </div>
   </section>
-
 `;
 
 export function setupUpcomingLayout() {

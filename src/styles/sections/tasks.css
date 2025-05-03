@@ -165,3 +165,45 @@
   transform-origin: bottom center;
   animation: swayAnimation 6s ease-in-out infinite alternate;
 }
+
+.upcoming-task-section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+.importance-title {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--dark-color);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.importance-high .importance-title i {
+  color: #8B2B30;
+}
+.importance-medium .importance-title i {
+  color: #A05F1A;
+}
+.importance-low .importance-title i {
+  color: #2F4F6F;
+}
+.importance-high {
+  background: var(--importance-high-bg);
+  color: #fff;
+}
+
+.importance-medium {
+  background: var(--importance-medium-bg);
+  color: #3e2a0f;
+}
+
+.importance-low {
+  background: var(--importance-low-bg);
+  color: #eaf3f8;
+}

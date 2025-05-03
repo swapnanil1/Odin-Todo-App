@@ -12,9 +12,12 @@
   --border-radius: 8px;
   --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   --transition-speed: 0.3s;
-  --sky-bg: linear-gradient(to bottom, #87ceeb, #dcedf7);
-  --beach-bg: linear-gradient(to bottom, #f7e8aa, #e0cda5);
-  --ground-bg: linear-gradient(to bottom, #90ee90, #7db97d);
+  --sky-bg: linear-gradient(to bottom, #6ec1f7, #a9d3f5);
+  --beach-bg: linear-gradient(to bottom, #f9e79f, #f4d97a);
+  --ground-bg: linear-gradient(to bottom, #8fdb8f, #7cc27c);
+  --importance-high-bg: linear-gradient(to bottom, #d98a8f, #c76a72);
+  --importance-medium-bg: linear-gradient(to bottom, #f0b76a, #e1a15f);
+  --importance-low-bg: linear-gradient(to bottom, #8bb5d1, #6a9ac0);
   --cloud-color: #f0f8ff;
   --sandcastle-color: #d2b48c;
   --plant-color: #228b22;
