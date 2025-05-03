@@ -22,7 +22,7 @@ const baseLayoutHTML = `
               </li>
               <li>
                 <button class="nav-button" data-view="upcoming" type="button" id="view-upcoming-tasks-btn">
-                  <i class="fas fa-calendar-alt"></i> Upcoming...
+                  <i class="fas fa-calendar-alt"></i> Upcoming Tasks
                 </button>
               </li>
             </ul>

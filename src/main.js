@@ -8,6 +8,8 @@ import { renderAllProjects } from "./handlers/projects/renderProjects";
 import { handleProjectEditMenu } from "./handlers/projects/handleProjectEvents";
 import setupMobileMenu from "./handlers/setupMobileMenuToggle.js";
 import { drawBaseLayout, drawAllTasksLayout } from "./layout/layoutManager.js";
+import { setupUpcomingLayout } from "./layout/upcoming.js";
+
 drawBaseLayout();
 drawAllTasksLayout("y");
 addTaskMenu();
@@ -18,17 +20,46 @@ handleProjectEditMenu();
 setupMobileMenu();
 let allTask = getAllTasks();
 renderTasks(allTask);
-const viewAllTasks = document.getElementById("view-all-tasks-btn");
-viewAllTasks.addEventListener("click", () => {
-  const appHeadTitle = document.getElementById("main-content-title");
-  appHeadTitle.innerText = "All Tasks";
-  renderTasks(allTask);
-});
+
+const viewAllTasksBtn = document.getElementById("view-all-tasks-btn");
+const viewAllUpcomingTasksBtn = document.getElementById(
+  "view-upcoming-tasks-btn"
+);
+const navButtons = document.querySelectorAll(".sidebar-navigation .nav-button");
+
+function setActiveButton(activeBtn) {
+  navButtons.forEach((btn) => btn.classList.remove("active"));
+  if (activeBtn) {
+    activeBtn.classList.add("active");
+  }
+}
+
+if (viewAllTasksBtn) {
+  viewAllTasksBtn.addEventListener("click", (e) => {
+    console.log("Switching to All Tasks view");
+    drawAllTasksLayout("y");
+    setActiveButton(e.currentTarget);
+    allTask = getAllTasks();
+    renderTasks(allTask);
+    setupMobileMenu();
+  });
+}
+
+if (viewAllUpcomingTasksBtn) {
+  viewAllUpcomingTasksBtn.addEventListener("click", (e) => {
+    console.log("Switching to Upcoming Tasks view");
+    setupUpcomingLayout();
+    setActiveButton(e.currentTarget);
+    setupMobileMenu();
+  });
+}
+
 const allCloseDialogBtns = document.querySelectorAll(".modal-close-btn");
 allCloseDialogBtns.forEach((button) => {
   button.addEventListener("click", () => {
     const modalToClose = button.closest("dialog");
-    modalToClose.close();
+    if (modalToClose) modalToClose.close();
   });
 });
+
 console.log("Application started.");
