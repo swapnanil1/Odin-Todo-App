@@ -34,10 +34,10 @@ export default function renderTasks(currentTaskState) {
       let targetListElement;
       let taskSvgMarkup;
 
-      if (task.priority === "highp") {
+      if (task.priority === "high") {
         taskSvgMarkup = createCloudSVG(task.title, task.description);
         targetListElement = highList;
-      } else if (task.priority === "medp") {
+      } else if (task.priority === "medium") {
         taskSvgMarkup = createSandCastleSVG(task.title, task.description);
         targetListElement = medList;
       } else {

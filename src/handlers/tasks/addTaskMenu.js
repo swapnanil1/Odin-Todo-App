@@ -29,7 +29,7 @@ export default function addTaskMenu() {
     TaskNameInput.value = "";
     TaskDescInput.value = "";
     TaskDueInput.value = "";
-    TaskPrioritySelect.value = "lowp";
+    TaskPrioritySelect.value = "low";
     hideSubmitBtn.style.display = "inline-block";
     showUpdateBtn.style.display = "none";
     showDeleteBtn.style.display = "none";
