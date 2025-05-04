@@ -3,7 +3,9 @@ import { drawAllTasksLayout } from "./layoutManager.js";
 const upcomingTaskLayoutHTML = `
   <header class="main-content-header">
     <h1 id="main-content-title">Upcoming Tasks</h1>
-    <button id="mobile-menu-toggle" class="button-icon" aria-label="Toggle Menu"></button>
+    <button id="mobile-menu-toggle" class="button-icon" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
   </header>
 
   <section class="upcoming-task-section importance-high" id="due-in-days">

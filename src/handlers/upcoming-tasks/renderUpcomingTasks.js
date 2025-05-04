@@ -1,7 +1,6 @@
 import createPlantSVG from "../../components/plantComponent.js";
 import createSandCastleSVG from "../../components/sandCastleComponent.js";
 import createCloudSVG from "../../components/cloudComponent.js";
-import { getAllTasks } from "../tasks/taskStorage.js";
 import resetUpcomingTasksEvents from "../tasks/resetTasksEvents.js";
 
 function getCurrentDateString() {
