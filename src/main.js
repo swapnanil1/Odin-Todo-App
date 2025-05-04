@@ -9,7 +9,7 @@ import { handleProjectEditMenu } from "./handlers/projects/handleProjectEvents";
 import setupMobileMenu from "./handlers/setupMobileMenuToggle.js";
 import { drawBaseLayout, drawAllTasksLayout } from "./layout/layoutManager.js";
 import { setupUpcomingLayout } from "./layout/upcoming.js";
-
+import renderUpcomingTasks from "./handlers/upcoming-tasks/renderUpcomingTasks.js";
 drawBaseLayout();
 drawAllTasksLayout("y");
 addTaskMenu();
@@ -49,6 +49,7 @@ if (viewAllUpcomingTasksBtn) {
   viewAllUpcomingTasksBtn.addEventListener("click", (e) => {
     console.log("Switching to Upcoming Tasks view");
     setupUpcomingLayout();
+    renderUpcomingTasks();
     setActiveButton(e.currentTarget);
     setupMobileMenu();
   });

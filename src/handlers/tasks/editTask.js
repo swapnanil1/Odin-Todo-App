@@ -15,7 +15,7 @@
 import renderTasks from "./renderTasks.js";
 import { getAllTasks, saveTask, deleteTask, getTask } from "./taskStorage.js";
 import { getAllProjectNames } from "../projects/localProjectStore.js";
-
+import renderUpcomingTasks from "../upcoming-tasks/renderUpcomingTasks.js";
 export function populateEditForm(uuid) {
   const TaskModalForm = document.getElementById("task-form");
   const TaskNameInput = document.getElementById("task-name-input");
@@ -82,6 +82,7 @@ export default function setupModalListeners() {
     TaskModal.close();
     let currentTasks = getAllTasks();
     renderTasks(currentTasks);
+    renderUpcomingTasks();
   };
 
   const handleDeleteTask = () => {
@@ -93,6 +94,7 @@ export default function setupModalListeners() {
     TaskModal.close();
     let currentTasks = getAllTasks();
     renderTasks(currentTasks);
+    renderUpcomingTasks();
   };
 
   showUpdateBtn.removeEventListener("click", handleUpdateTask);
