@@ -82,7 +82,7 @@ export default function setupModalListeners() {
     TaskModal.close();
     let currentTasks = getAllTasks();
     renderTasks(currentTasks);
-    renderUpcomingTasks();
+    renderUpcomingTasks(getAllTasks());
   };
 
   const handleDeleteTask = () => {
@@ -94,7 +94,7 @@ export default function setupModalListeners() {
     TaskModal.close();
     let currentTasks = getAllTasks();
     renderTasks(currentTasks);
-    renderUpcomingTasks();
+    renderUpcomingTasks(getAllTasks());
   };
 
   showUpdateBtn.removeEventListener("click", handleUpdateTask);

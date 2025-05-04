@@ -49,7 +49,7 @@ if (viewAllUpcomingTasksBtn) {
   viewAllUpcomingTasksBtn.addEventListener("click", (e) => {
     console.log("Switching to Upcoming Tasks view");
     setupUpcomingLayout();
-    renderUpcomingTasks();
+    renderUpcomingTasks(getAllTasks());
     setActiveButton(e.currentTarget);
     setupMobileMenu();
   });

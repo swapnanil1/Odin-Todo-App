@@ -1,5 +1,6 @@
 import { getAllTaskByProject } from "../tasks/taskStorage";
 import renderTasks from "../tasks/renderTasks";
+import renderUpcomingTasks from "../upcoming-tasks/renderUpcomingTasks";
 const handleProjectMenuClick = (e) => {
   e.stopPropagation();
   const clickedProject = e.currentTarget;
@@ -33,9 +34,10 @@ const viewTasksByProjectClick = (e) => {
   const clickedProject = e.currentTarget;
   const projectName = clickedProject.firstChild.textContent.trim();
   const appHeadTitle = document.getElementById("main-content-title");
-  appHeadTitle.innerText = `Project: ${projectName}`;
+  appHeadTitle.innerText = `Filter Project: ${projectName}`;
   const allTasksByProject = getAllTaskByProject(projectName);
   renderTasks(allTasksByProject);
+  renderUpcomingTasks(allTasksByProject);
 };
 
 export function handleProjectEditMenu() {

@@ -36,8 +36,7 @@ function getDaysDifference(futureDateString, baseDateStr) {
   return differenceInDays;
 }
 
-export default function renderUpcomingTasks() {
-  const allTasks = getAllTasks();
+export default function renderUpcomingTasks(currentUpcomingTasks) {
   const tasksDueInDaysList = document.getElementById("up-in-days");
   const tasksDueInWeeksList = document.getElementById("up-in-weeks");
   const tasksDueInMonthsList = document.getElementById("up-in-months");
@@ -48,7 +47,7 @@ export default function renderUpcomingTasks() {
 
   const todayString = getCurrentDateString();
 
-  allTasks.forEach(function (task) {
+  currentUpcomingTasks.forEach(function (task) {
     if (!task.dueDate) return;
     const daysDifference = getDaysDifference(task.dueDate, todayString);
     if (isNaN(daysDifference) || daysDifference > 0) return;

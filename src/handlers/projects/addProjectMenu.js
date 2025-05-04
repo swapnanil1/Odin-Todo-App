@@ -74,14 +74,21 @@ export default function addProjectMenu() {
   }
   if (deleteProjectBtn) {
     deleteProjectBtn.addEventListener("click", () => {
-      const deleteProjectID = projectModal.dataset.id;
-      if (!deleteProjectID) {
-        console.error("No project ID set in modal. Cannot delete.");
+      const userInput = prompt(
+        "Deleting a project removes it from all attached tasks: Are you sure ? y/N"
+      );
+      if (userInput === "y") {
+        const deleteProjectID = projectModal.dataset.id;
+        if (!deleteProjectID) {
+          console.error("No project ID set in modal. Cannot delete.");
+          return;
+        }
+        deleteProject(deleteProjectID);
+        renderAllProjects();
+        projectModal.close();
+      } else {
         return;
       }
-      deleteProject(deleteProjectID);
-      renderAllProjects();
-      projectModal.close();
     });
   }
   if (deleteAllProjectsBtn) {
