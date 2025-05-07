@@ -1,17 +1,18 @@
-import "./styles/style.css";
-import addTaskMenu from "./handlers/tasks/addTaskMenu.js";
-import renderTasks from "./handlers/tasks/renderTasks.js";
-import { getAllTasks } from "./handlers/tasks/taskStorage.js";
-import setupModalListeners from "./handlers/tasks/editTask.js";
-import addProjectMenu from "./handlers/projects/addProjectMenu";
-import { renderAllProjects } from "./handlers/projects/renderProjects";
-import { handleProjectEditMenu } from "./handlers/projects/handleProjectEvents";
-import setupMobileMenu from "./handlers/setupMobileMenuToggle.js";
-import { drawBaseLayout, drawAllTasksLayout } from "./layout/layoutManager.js";
-import { setupUpcomingLayout } from "./layout/upcoming.js";
-import renderUpcomingTasks from "./handlers/upcoming-tasks/renderUpcomingTasks.js";
+import './styles/style.css';
+import addTaskMenu from './handlers/tasks/addTaskMenu';
+import renderTasks from './handlers/tasks/renderTasks';
+import { getAllTasks } from './handlers/tasks/taskStorage';
+import { setupModalListeners } from './handlers/tasks/editTask';
+import addProjectMenu from './handlers/projects/addProjectMenu';
+import renderAllProjects from './handlers/projects/renderProjects';
+import { handleProjectEditMenu } from './handlers/projects/handleProjectEvents';
+import setupMobileMenu from './handlers/setupMobileMenuToggle';
+import { drawBaseLayout, drawAllTasksLayout } from './layout/layoutManager';
+import setupUpcomingLayout from './layout/upcoming';
+import renderUpcomingTasks from './handlers/upcoming-tasks/renderUpcomingTasks';
+
 drawBaseLayout();
-drawAllTasksLayout("y");
+drawAllTasksLayout('y');
 addTaskMenu();
 setupModalListeners();
 addProjectMenu();
@@ -21,23 +22,23 @@ setupMobileMenu();
 let allTask = getAllTasks();
 renderTasks(allTask);
 
-const viewAllTasksBtn = document.getElementById("view-all-tasks-btn");
+const viewAllTasksBtn = document.getElementById('view-all-tasks-btn');
 const viewAllUpcomingTasksBtn = document.getElementById(
-  "view-upcoming-tasks-btn"
+  'view-upcoming-tasks-btn'
 );
-const navButtons = document.querySelectorAll(".sidebar-navigation .nav-button");
+const navButtons = document.querySelectorAll('.sidebar-navigation .nav-button');
 
 function setActiveButton(activeBtn) {
-  navButtons.forEach((btn) => btn.classList.remove("active"));
+  navButtons.forEach((btn) => btn.classList.remove('active'));
   if (activeBtn) {
-    activeBtn.classList.add("active");
+    activeBtn.classList.add('active');
   }
 }
 
 if (viewAllTasksBtn) {
-  viewAllTasksBtn.addEventListener("click", (e) => {
-    console.log("Switching to All Tasks view");
-    drawAllTasksLayout("y");
+  viewAllTasksBtn.addEventListener('click', (e) => {
+    console.log('Switching to All Tasks view');
+    drawAllTasksLayout('y');
     setActiveButton(e.currentTarget);
     allTask = getAllTasks();
     renderTasks(allTask);
@@ -46,8 +47,8 @@ if (viewAllTasksBtn) {
 }
 
 if (viewAllUpcomingTasksBtn) {
-  viewAllUpcomingTasksBtn.addEventListener("click", (e) => {
-    console.log("Switching to Upcoming Tasks view");
+  viewAllUpcomingTasksBtn.addEventListener('click', (e) => {
+    console.log('Switching to Upcoming Tasks view');
     setupUpcomingLayout();
     renderUpcomingTasks(getAllTasks());
     setActiveButton(e.currentTarget);
@@ -55,12 +56,12 @@ if (viewAllUpcomingTasksBtn) {
   });
 }
 
-const allCloseDialogBtns = document.querySelectorAll(".modal-close-btn");
+const allCloseDialogBtns = document.querySelectorAll('.modal-close-btn');
 allCloseDialogBtns.forEach((button) => {
-  button.addEventListener("click", () => {
-    const modalToClose = button.closest("dialog");
+  button.addEventListener('click', () => {
+    const modalToClose = button.closest('dialog');
     if (modalToClose) modalToClose.close();
   });
 });
 
-console.log("Application started.");
+console.log('Application started.');

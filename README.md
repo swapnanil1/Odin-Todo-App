@@ -1,2 +1,3 @@
 # Odin-Todo-App
-A Simple Todo app 
+
+A Simple Todo app

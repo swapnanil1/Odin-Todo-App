@@ -5,7 +5,8 @@ button {
   border-radius: var(--border-radius);
   padding: 0.6em 1.2em;
   font-size: 0.9rem;
-  transition: background-color var(--transition-speed) ease,
+  transition:
+    background-color var(--transition-speed) ease,
     transform var(--transition-speed) ease;
   line-height: 1.4;
   display: inline-flex;

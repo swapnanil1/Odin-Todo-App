@@ -1,4 +1,4 @@
-import { drawAllTasksLayout } from "./layoutManager.js";
+import { drawAllTasksLayout } from './layoutManager';
 
 const upcomingTaskLayoutHTML = `
   <header class="main-content-header">
@@ -36,13 +36,13 @@ const upcomingTaskLayoutHTML = `
   </section>
 `;
 
-export function setupUpcomingLayout() {
-  drawAllTasksLayout("n");
-  const mainContentArea = document.querySelector("main.app-content");
+export default function setupUpcomingLayout() {
+  drawAllTasksLayout('n');
+  const mainContentArea = document.querySelector('main.app-content');
   if (!mainContentArea) {
-    console.error("Main content area not found.");
+    console.error('Main content area not found.');
     return;
   }
   mainContentArea.innerHTML = upcomingTaskLayoutHTML;
-  console.log("Upcoming Tasks view layout drawn.");
+  console.log('Upcoming Tasks view layout drawn.');
 }

@@ -3,23 +3,23 @@
 // then renders them according to there priority.
 // after rendering tasks we run resetTasksEvents that adds events for editing said task
 
-import createPlantSVG from "../../components/plantComponent.js";
-import createSandCastleSVG from "../../components/sandCastleComponent.js";
-import createCloudSVG from "../../components/cloudComponent.js";
-import resetTasksEvents from "./resetTasksEvents.js";
+import createPlantSVG from '../../components/plantComponent';
+import createSandCastleSVG from '../../components/sandCastleComponent';
+import createCloudSVG from '../../components/cloudComponent';
+import resetTasksEvents from './resetTasksEvents';
 
 export default function renderTasks(currentTaskState) {
-  const highList = document.getElementById("high-priority-tasks");
-  const medList = document.getElementById("medium-priority-tasks");
-  const lowList = document.getElementById("low-priority-tasks");
+  const highList = document.getElementById('high-priority-tasks');
+  const medList = document.getElementById('medium-priority-tasks');
+  const lowList = document.getElementById('low-priority-tasks');
 
-  if (highList) highList.innerHTML = "";
-  if (medList) medList.innerHTML = "";
-  if (lowList) lowList.innerHTML = "";
+  if (highList) highList.innerHTML = '';
+  if (medList) medList.innerHTML = '';
+  if (lowList) lowList.innerHTML = '';
 
   if (Array.isArray(currentTaskState)) {
     currentTaskState.forEach((task) => {
-      const taskListItemElement = document.createElement("li");
+      const taskListItemElement = document.createElement('li');
 
       taskListItemElement.dataset.title = task.title;
       taskListItemElement.dataset.description = task.description;
@@ -28,16 +28,16 @@ export default function renderTasks(currentTaskState) {
       taskListItemElement.dataset.project = task.project;
       taskListItemElement.dataset.uuid = task.uuid;
 
-      taskListItemElement.classList.add("task-item");
+      taskListItemElement.classList.add('task-item');
       taskListItemElement.classList.add(`${task.priority}-task`);
 
       let targetListElement;
       let taskSvgMarkup;
 
-      if (task.priority === "high") {
+      if (task.priority === 'high') {
         taskSvgMarkup = createCloudSVG(task.title, task.description);
         targetListElement = highList;
-      } else if (task.priority === "medium") {
+      } else if (task.priority === 'medium') {
         taskSvgMarkup = createSandCastleSVG(task.title, task.description);
         targetListElement = medList;
       } else {

@@ -50,66 +50,66 @@ const potTextTemplate = `
   </text>
 `;
 
-const potColors = ["#D2691E", "#A0522D", "#CD853F", "#B8860B", "#8B4513"];
-const potRimColors = ["#B85C1A", "#8B4513", "#A0522D", "#DAA520", "#654321"];
-const potStrokeColors = ["#8B4513", "#654321", "#A0522D"];
-const soilColors = ["#654321", "#5C4033", "#8B4513"];
-const leafColors = ["#2E8B57", "#228B22", "#006400", "#556B2F", "#8FBC8F"];
-const stemColors = ["#228B22", "#006400", "#556B2F"];
+const potColors = ['#D2691E', '#A0522D', '#CD853F', '#B8860B', '#8B4513'];
+const potRimColors = ['#B85C1A', '#8B4513', '#A0522D', '#DAA520', '#654321'];
+const potStrokeColors = ['#8B4513', '#654321', '#A0522D'];
+const soilColors = ['#654321', '#5C4033', '#8B4513'];
+const leafColors = ['#2E8B57', '#228B22', '#006400', '#556B2F', '#8FBC8F'];
+const stemColors = ['#228B22', '#006400', '#556B2F'];
 const petalColors = [
-  "#FFFFFF",
-  "#FFC0CB",
-  "#FFD700",
-  "#FFA500",
-  "#FF4500",
-  "#DC143C",
-  "#8A2BE2",
-  "#4169E1",
-  "#ADD8E6",
+  '#FFFFFF',
+  '#FFC0CB',
+  '#FFD700',
+  '#FFA500',
+  '#FF4500',
+  '#DC143C',
+  '#8A2BE2',
+  '#4169E1',
+  '#ADD8E6',
 ];
 const petalStrokeColors = [
-  "#CCCCCC",
-  "#FFB6C1",
-  "#DAA520",
-  "#D2691E",
-  "#CC0000",
-  "#B22222",
-  "#6A0DAD",
-  "#1E90FF",
-  "#87CEEB",
+  '#CCCCCC',
+  '#FFB6C1',
+  '#DAA520',
+  '#D2691E',
+  '#CC0000',
+  '#B22222',
+  '#6A0DAD',
+  '#1E90FF',
+  '#87CEEB',
 ];
 const centerColors = [
-  "#FFFF00",
-  "#FFD700",
-  "#FFA500",
-  "#8B4513",
-  "#F5F5DC",
-  "#EEE8AA",
+  '#FFFF00',
+  '#FFD700',
+  '#FFA500',
+  '#8B4513',
+  '#F5F5DC',
+  '#EEE8AA',
 ];
 
-const redPetalColors = ["#FF4500", "#DC143C"];
+const redPetalColors = ['#FF4500', '#DC143C'];
 
 const nonRedOverridePalettes = [
-  { petal: "#FFFFFF", stroke: "#CCCCCC", center: "#FFFF00" },
-  { petal: "#FFD700", stroke: "#DAA520", center: "#FFA500" },
-  { petal: "#8A2BE2", stroke: "#6A0DAD", center: "#F5F5DC" },
-  { petal: "#4169E1", stroke: "#1E90FF", center: "#FFFF00" },
-  { petal: "#ADD8E6", stroke: "#87CEEB", center: "#EEE8AA" },
+  { petal: '#FFFFFF', stroke: '#CCCCCC', center: '#FFFF00' },
+  { petal: '#FFD700', stroke: '#DAA520', center: '#FFA500' },
+  { petal: '#8A2BE2', stroke: '#6A0DAD', center: '#F5F5DC' },
+  { petal: '#4169E1', stroke: '#1E90FF', center: '#FFFF00' },
+  { petal: '#ADD8E6', stroke: '#87CEEB', center: '#EEE8AA' },
 ];
 
 function escapeXml(unsafe) {
-  if (typeof unsafe !== "string") {
+  if (typeof unsafe !== 'string') {
     return unsafe;
   }
   // *** Corrected escapeXml function ***
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
-      case "<":
-        return "<";
-      case ">":
-        return ">";
-      case "&":
-        return "&";
+      case '<':
+        return '<';
+      case '>':
+        return '>';
+      case '&':
+        return '&';
       case "'":
         return "'";
       case '"':
@@ -121,7 +121,7 @@ function escapeXml(unsafe) {
 }
 
 function getRandomElement(arr) {
-  if (!arr || arr.length === 0) return "";
+  if (!arr || arr.length === 0) return '';
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
@@ -158,7 +158,7 @@ function getRandomPlantSvg(name, descript) {
     .replace(/CENTER_COLOR/g, currentCenterColor)
     .replace(/PETAL_STROKE_COLOR/g, currentPetalStroke);
 
-  let multiFlowerComponent = "";
+  let multiFlowerComponent = '';
   if (numberOfFlowers === 2) {
     multiFlowerComponent = `
       <g transform="translate(-15, 0)">${baseFlowerContent}</g>
@@ -172,21 +172,21 @@ function getRandomPlantSvg(name, descript) {
     `;
   }
 
-  let currentPot = potComponent
+  const currentPot = potComponent
     .replace(/POT_FILL_COLOR/g, potFill)
     .replace(/POT_STROKE_COLOR/g, potStroke)
     .replace(/POT_RIM_COLOR/g, potRim)
     .replace(/POT_SOIL_COLOR/g, potSoil);
 
-  let currentFoliage = foliageComponent
+  const currentFoliage = foliageComponent
     .replace(/STEM_COLOR/g, stemColor)
     .replace(/LEAF_COLOR/g, leafColor);
 
-  const titleContent = escapeXml(name || "Random Plant");
-  const descContent = escapeXml(descript || "A randomly selected plant.");
+  const titleContent = escapeXml(name || 'Random Plant');
+  const descContent = escapeXml(descript || 'A randomly selected plant.');
 
   const potTextComponent = potTextTemplate.replace(
-    "POT_TEXT_CONTENT",
+    'POT_TEXT_CONTENT',
     titleContent
   );
 

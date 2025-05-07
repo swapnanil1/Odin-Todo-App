@@ -20,7 +20,9 @@ body.modal-open-no-scroll {
   display: block;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+  transition:
+    opacity 0.25s ease-out,
+    visibility 0.25s ease-out;
   background-color: var(--light-color, #ffffff);
 }
 
@@ -90,8 +92,8 @@ body.modal-open-no-scroll {
   color: var(--grey-dark, #666666);
 }
 
-.form-group input[type="text"],
-.form-group input[type="date"],
+.form-group input[type='text'],
+.form-group input[type='date'],
 .form-group textarea,
 .form-group select {
   padding: 0.8em 1em;

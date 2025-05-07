@@ -1,45 +1,44 @@
 import {
   saveProject,
-  getAllProjects,
   deleteProject,
   deleteAllProjects,
-} from "./localProjectStore.js";
-import { renderAllProjects } from "./renderProjects.js";
+} from './localProjectStore';
+import renderAllProjects from './renderProjects';
 
 export default function addProjectMenu() {
-  const addProjectBtn = document.getElementById("add-project-btn");
-  const projectModal = document.getElementById("project-modal");
-  const projectNameInput = document.getElementById("project-name-input");
-  const projectForm = document.getElementById("project-form");
-  const projectModalHeading = document.getElementById("project-modal-heading");
-  const projectSaveButton = document.getElementById("project-save-btn");
-  const updateProjectButton = document.getElementById("update-project-btn");
-  const addProjectCancelBtn = document.getElementById("add-project-cancel-btn");
-  const deleteProjectBtn = document.getElementById("delete-project-btn");
+  const addProjectBtn = document.getElementById('add-project-btn');
+  const projectModal = document.getElementById('project-modal');
+  const projectNameInput = document.getElementById('project-name-input');
+  const projectForm = document.getElementById('project-form');
+  const projectModalHeading = document.getElementById('project-modal-heading');
+  const projectSaveButton = document.getElementById('project-save-btn');
+  const updateProjectButton = document.getElementById('update-project-btn');
+  const addProjectCancelBtn = document.getElementById('add-project-cancel-btn');
+  const deleteProjectBtn = document.getElementById('delete-project-btn');
   const deleteAllProjectsBtn = document.getElementById(
-    "delete-all-project-btn"
+    'delete-all-project-btn'
   );
   if (addProjectBtn) {
-    addProjectBtn.addEventListener("click", () => {
+    addProjectBtn.addEventListener('click', () => {
       projectForm.reset();
-      projectModal.removeAttribute("data-id");
-      projectModalHeading.textContent = "Add New Project";
-      projectSaveButton.style.display = "inline-block";
-      updateProjectButton.style.display = "none";
-      deleteProjectBtn.style.display = "none";
+      projectModal.removeAttribute('data-id');
+      projectModalHeading.textContent = 'Add New Project';
+      projectSaveButton.style.display = 'inline-block';
+      updateProjectButton.style.display = 'none';
+      deleteProjectBtn.style.display = 'none';
 
       projectModal.showModal();
     });
   }
 
   if (addProjectCancelBtn && projectModal) {
-    addProjectCancelBtn.addEventListener("click", () => {
+    addProjectCancelBtn.addEventListener('click', () => {
       projectModal.close();
     });
   }
 
   if (projectForm && projectModal && projectNameInput) {
-    projectForm.addEventListener("submit", (event) => {
+    projectForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const isEditing = projectModal.dataset.id; // should not be there
 
@@ -59,7 +58,7 @@ export default function addProjectMenu() {
     });
   }
   if (updateProjectButton) {
-    updateProjectButton.addEventListener("click", () => {
+    updateProjectButton.addEventListener('click', () => {
       const keepSameID = projectModal.dataset.id;
       const updateName = projectNameInput.value.trim();
       deleteProject(keepSameID);
@@ -73,32 +72,28 @@ export default function addProjectMenu() {
     });
   }
   if (deleteProjectBtn) {
-    deleteProjectBtn.addEventListener("click", () => {
+    deleteProjectBtn.addEventListener('click', () => {
       const userInput = prompt(
-        "Deleting a project removes it from all attached tasks: Are you sure ? y/N"
+        'Deleting a project removes it from all attached tasks: Are you sure ? y/N'
       );
-      if (userInput === "y") {
+      if (userInput === 'y') {
         const deleteProjectID = projectModal.dataset.id;
         if (!deleteProjectID) {
-          console.error("No project ID set in modal. Cannot delete.");
+          console.error('No project ID set in modal. Cannot delete.');
           return;
         }
         deleteProject(deleteProjectID);
         renderAllProjects();
         projectModal.close();
-      } else {
-        return;
       }
     });
   }
   if (deleteAllProjectsBtn) {
-    deleteAllProjectsBtn.addEventListener("click", () => {
-      const userInput = prompt("Deleting All Project: Are you sure ? y/N");
-      if (userInput === "y") {
+    deleteAllProjectsBtn.addEventListener('click', () => {
+      const userInput = prompt('Deleting All Project: Are you sure ? y/N');
+      if (userInput === 'y') {
         deleteAllProjects();
         renderAllProjects();
-      } else {
-        return;
       }
     });
   }

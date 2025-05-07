@@ -184,33 +184,32 @@ const allTasksLayoutHTML = `
 
 export function drawBaseLayout() {
   if (!document.body) {
-    console.error("DOM body not found.");
+    console.error('DOM body not found.');
     return;
   }
   document.body.innerHTML = baseLayoutHTML;
-  console.log("Base layout, overlay, and modals drawn successfully.");
+  console.log('Base layout, overlay, and modals drawn successfully.');
 }
 
 export function drawAllTasksLayout(yn) {
-  const mainContentArea = document.querySelector("main.app-content");
+  const mainContentArea = document.querySelector('main.app-content');
   if (!mainContentArea) {
-    if (yn === "y") {
+    if (yn === 'y') {
       console.error(
         "<main class='app-content'> element not found. Ensure base layout is drawn first."
       );
     }
     return;
   }
-  if (yn === "y") {
+  if (yn === 'y') {
     mainContentArea.innerHTML = allTasksLayoutHTML;
-    console.log("All Tasks view layout drawn successfully.");
-  } else if (yn === "n") {
-    mainContentArea.innerHTML = "";
-    console.log("Main content area cleared.");
+    console.log('All Tasks view layout drawn successfully.');
+  } else if (yn === 'n') {
+    mainContentArea.innerHTML = '';
+    console.log('Main content area cleared.');
   } else {
     console.error(
       "Invalid parameter passed to drawAllTasksLayout. Expected 'y' or 'n'."
     );
-    return;
   }
 }

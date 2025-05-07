@@ -1,4 +1,4 @@
-//Seriously, for building a successful app that has a lot of user dataStorage/interaction you need to have a proper database.
+// Seriously, for building a successful app that has a lot of user dataStorage/interaction you need to have a proper database.
 // That you as a dev can call into to update/add/delete data from anywhere inside the code.
 
 // no mater how buried it may be inside multiple if-else functions or eventListens it might be
@@ -13,7 +13,7 @@
 // Basically, it's our mini "database" for tasks. Keeps the rest of the code cleaner
 // and focused on the UI, instead of worrying about where the data lives. A huge relief!
 
-const STORAGE_KEY = "tasks";
+const STORAGE_KEY = 'tasks';
 
 export function getAllTasks() {
   const tasksJSON = localStorage.getItem(STORAGE_KEY);
@@ -48,7 +48,7 @@ export function saveTask(taskObject) {
 
 export function deleteTask(uuid) {
   let currentTasks = getAllTasks();
-  console.log("Deleting a task");
+  console.log('Deleting a task');
   const initialLength = currentTasks.length;
   currentTasks = currentTasks.filter((task) => task.uuid !== uuid);
 
@@ -59,7 +59,7 @@ export function deleteTask(uuid) {
 
 export function getTask(uuid) {
   const currentTasks = getAllTasks();
-  console.log("getting a Task");
+  console.log('getting a Task');
   const foundTask = currentTasks.find((task) => task.uuid === uuid);
   return foundTask || null;
 }

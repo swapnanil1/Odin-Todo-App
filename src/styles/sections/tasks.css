@@ -47,7 +47,8 @@
 .task-item {
   position: relative;
   cursor: pointer;
-  transition: transform var(--transition-speed) ease,
+  transition:
+    transform var(--transition-speed) ease,
     filter var(--transition-speed) ease;
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
   width: 100px;
@@ -91,13 +92,14 @@
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-speed) ease,
+  transition:
+    opacity var(--transition-speed) ease,
     visibility var(--transition-speed) ease;
   z-index: 10;
   pointer-events: none;
 }
 .task-tooltip::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 50%;
@@ -119,7 +121,8 @@
   gap: 0.3rem;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-speed) ease,
+  transition:
+    opacity var(--transition-speed) ease,
     visibility var(--transition-speed) ease;
   z-index: 5;
 }
@@ -185,13 +188,13 @@
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 .importance-high .importance-title i {
-  color: #8B2B30;
+  color: #8b2b30;
 }
 .importance-medium .importance-title i {
-  color: #A05F1A;
+  color: #a05f1a;
 }
 .importance-low .importance-title i {
-  color: #2F4F6F;
+  color: #2f4f6f;
 }
 .importance-high {
   background: var(--importance-high-bg);

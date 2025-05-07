@@ -1,5 +1,5 @@
 // localProjectStore.js
-const STORAGE_KEY = "projects";
+const STORAGE_KEY = 'projects';
 
 export function getAllProjects() {
   const projectJson = localStorage.getItem(STORAGE_KEY);
@@ -24,7 +24,7 @@ export function saveProject(projectObject) {
     (projectInDB) => projectInDB.projectName === projectObject.projectName
   );
   if (duplicate) {
-    alert("This project already exists");
+    alert('This project already exists');
     return;
   }
 
@@ -43,7 +43,7 @@ export function saveProject(projectObject) {
 
 export function deleteProject(projectID) {
   let currentProjects = getAllProjects();
-  console.log("Deleting project...");
+  console.log('Deleting project...');
   const initialLength = currentProjects.length;
 
   currentProjects = currentProjects.filter(
@@ -52,7 +52,7 @@ export function deleteProject(projectID) {
 
   if (currentProjects.length < initialLength) {
     saveAllProjects(currentProjects);
-    console.log("Project Deleted ");
+    console.log('Project Deleted ');
   }
 }
 
@@ -63,12 +63,11 @@ export function getProject(projectID) {
   );
 
   if (foundProject !== undefined) {
-    console.log("found project");
+    console.log('found project');
     return foundProject;
-  } else {
-    console.log("no project");
-    return null;
   }
+  console.log('no project');
+  return null;
 }
 
 export function deleteAllProjects() {

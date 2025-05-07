@@ -12,22 +12,23 @@
 // When you click DELETE: Same thing - the code of the button captures the ID *from the form,
 // informs storage to delete the task of that ID, and then reloads the list, hiding the task.
 
-import renderTasks from "./renderTasks.js";
-import { getAllTasks, saveTask, deleteTask, getTask } from "./taskStorage.js";
-import { getAllProjectNames } from "../projects/localProjectStore.js";
-import renderUpcomingTasks from "../upcoming-tasks/renderUpcomingTasks.js";
+import renderTasks from './renderTasks';
+import { getAllTasks, saveTask, deleteTask, getTask } from './taskStorage';
+import { getAllProjectNames } from '../projects/localProjectStore';
+import renderUpcomingTasks from '../upcoming-tasks/renderUpcomingTasks';
+
 export function populateEditForm(uuid) {
-  const TaskModalForm = document.getElementById("task-form");
-  const TaskNameInput = document.getElementById("task-name-input");
-  const TaskDescInput = document.getElementById("task-desc-input");
-  const TaskDueInput = document.getElementById("task-due-input");
-  const TaskPrioritySelect = document.getElementById("task-priority-select");
-  const TaskProjectSelect = document.getElementById("task-project-select");
+  const TaskModalForm = document.getElementById('task-form');
+  const TaskNameInput = document.getElementById('task-name-input');
+  const TaskDescInput = document.getElementById('task-desc-input');
+  const TaskDueInput = document.getElementById('task-due-input');
+  const TaskPrioritySelect = document.getElementById('task-priority-select');
+  const TaskProjectSelect = document.getElementById('task-project-select');
 
   const task = getTask(uuid);
 
   if (task) {
-    TaskProjectSelect.innerHTML = "";
+    TaskProjectSelect.innerHTML = '';
     TaskModalForm.dataset.editingUuid = uuid;
     TaskNameInput.value = task.title;
     TaskDescInput.value = task.description;
@@ -35,7 +36,7 @@ export function populateEditForm(uuid) {
     TaskPrioritySelect.value = task.priority;
     const projectNames = getAllProjectNames();
     projectNames.forEach((project) => {
-      const option = document.createElement("option");
+      const option = document.createElement('option');
       option.value = project;
       option.textContent = project;
       TaskProjectSelect.appendChild(option);
@@ -43,28 +44,28 @@ export function populateEditForm(uuid) {
     TaskProjectSelect.value = task.project;
   } else {
     console.log(`Task with UUID ${uuid} not found for editing.`);
-    TaskModalForm.removeAttribute("data-editing-uuid");
-    TaskNameInput.value = "";
-    TaskDescInput.value = "";
-    TaskDueInput.value = "";
-    TaskPrioritySelect.value = "lowp";
-    TaskProjectSelect.value = "Default";
+    TaskModalForm.removeAttribute('data-editing-uuid');
+    TaskNameInput.value = '';
+    TaskDescInput.value = '';
+    TaskDueInput.value = '';
+    TaskPrioritySelect.value = 'lowp';
+    TaskProjectSelect.value = 'Default';
   }
 }
 
-export default function setupModalListeners() {
-  const TaskModal = document.getElementById("task-modal");
-  const TaskModalForm = document.getElementById("task-form");
-  const showUpdateBtn = document.getElementById("task-update-btn");
-  const TaskDeleteBtn = document.getElementById("task-delete-btn");
+export function setupModalListeners() {
+  const TaskModal = document.getElementById('task-modal');
+  const TaskModalForm = document.getElementById('task-form');
+  const showUpdateBtn = document.getElementById('task-update-btn');
+  const TaskDeleteBtn = document.getElementById('task-delete-btn');
 
   const handleUpdateTask = () => {
     const uuidToUpdate = TaskModalForm.dataset.editingUuid;
-    const TaskNameInput = document.getElementById("task-name-input");
-    const TaskDescInput = document.getElementById("task-desc-input");
-    const TaskDueInput = document.getElementById("task-due-input");
-    const TaskPrioritySelect = document.getElementById("task-priority-select");
-    const TaskProjectSelect = document.getElementById("task-project-select");
+    const TaskNameInput = document.getElementById('task-name-input');
+    const TaskDescInput = document.getElementById('task-desc-input');
+    const TaskDueInput = document.getElementById('task-due-input');
+    const TaskPrioritySelect = document.getElementById('task-priority-select');
+    const TaskProjectSelect = document.getElementById('task-project-select');
 
     const updatedTask = {
       title: TaskNameInput.value.trim(),
@@ -78,9 +79,9 @@ export default function setupModalListeners() {
     deleteTask(uuidToUpdate);
     saveTask(updatedTask);
 
-    TaskModalForm.removeAttribute("data-editing-uuid");
+    TaskModalForm.removeAttribute('data-editing-uuid');
     TaskModal.close();
-    let currentTasks = getAllTasks();
+    const currentTasks = getAllTasks();
     renderTasks(currentTasks);
     renderUpcomingTasks(getAllTasks());
   };
@@ -90,20 +91,20 @@ export default function setupModalListeners() {
 
     deleteTask(uuidToDelete);
 
-    TaskModalForm.removeAttribute("data-editing-uuid");
+    TaskModalForm.removeAttribute('data-editing-uuid');
     TaskModal.close();
-    let currentTasks = getAllTasks();
+    const currentTasks = getAllTasks();
     renderTasks(currentTasks);
     renderUpcomingTasks(getAllTasks());
   };
 
-  showUpdateBtn.removeEventListener("click", handleUpdateTask);
-  TaskDeleteBtn.removeEventListener("click", handleDeleteTask);
+  showUpdateBtn.removeEventListener('click', handleUpdateTask);
+  TaskDeleteBtn.removeEventListener('click', handleDeleteTask);
 
-  showUpdateBtn.addEventListener("click", handleUpdateTask);
-  TaskDeleteBtn.addEventListener("click", handleDeleteTask);
+  showUpdateBtn.addEventListener('click', handleUpdateTask);
+  TaskDeleteBtn.addEventListener('click', handleDeleteTask);
 
-  console.log("Modal update/delete listeners attached.");
+  console.log('Modal update/delete listeners attached.');
 }
 // **Very Important Question**
 //  So, Why go through the hassle and add TaskModalForm.dataset.editingUuid = uuid to the DOM as a copy
